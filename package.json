@@ -1,0 +1,23 @@
+{
+  "name": "fintrack",
+  "version": "1.0.0",
+  "description": "Create shareable investment watchlists!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "lint": "eslint ."
+  },
+  "author": "Jasvin James",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7",
+    "mongoose-unique-validator": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "nodemon": "^2.0.15"
+  }
+}
