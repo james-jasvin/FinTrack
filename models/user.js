@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema({
 	]
 })
 
+/*
+	Function that will be executed when a User's MongoDB entry is converted into JSON
+	That is why we delete passwordHash in order to avoid exposing even the hash to the public
+	Store MongoDB generated id field _id in id field and delete the auto-generated __v and _id fields
+*/
 userSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		returnedObject.id = returnedObject._id.toString()
