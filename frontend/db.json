@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "id": "61f0418cfe24a23454d47500",
+      "username": "User",
+      "name": "User",
+      "passwordHash": "$2b$10$IsQ8njpWAq0GqMs9fFK2ZO9bNAP4OK/h08wqwnRKp.5omqx6xHEEK",
+      "watchlists": [
+        "1"
+      ]
+    }
+  ],
+  "instruments": [
+    {
+      "id": "1",
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/tata-consultancy-services-TCS?"
+    },
+    {
+      "id": "2",
+      "symbol": "INFY",
+      "name": "Infosys",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/infosys-INFY?"
+    },
+    {
+      "id": "3",
+      "symbol": "M_AXLB",
+      "name": "Axis Bluechip Fund",
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/axis-bluechip-fund-M_AXLB"
+    }
+  ],
+  "watchlists": [
+    {
+      "id": "1",
+      "name": "IT Stocks",
+      "user": "61f0418cfe24a23454d47500",
+      "isMF": false,
+      "instruments": [
+        {
+          "id": "1",
+          "symbol": "TCS",
+          "name": "Tata Consultancy Services",
+          "url": "https://www.tickertape.in/stocks/tata-consultancy-services-TCS?"
+        },
+        {
+          "id": "2",
+          "symbol": "INFY",
+          "name": "Infosys",
+          "url": "https://www.tickertape.in/stocks/infosys-INFY?"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "MF Watcher",
+      "user": "61f0418cfe24a23454d47500",
+      "isMF": true,
+      "instruments": [
+        {
+          "id": "1",
+          "symbol": "M_AXLB",
+          "name": "Axis Bluechip Fund",
+          "url": "https://www.tickertape.in/mutualfunds/axis-bluechip-fund-M_AXLB"
+        }
+      ]
+    }
+  ]
+}

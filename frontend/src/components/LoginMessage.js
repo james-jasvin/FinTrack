@@ -2,7 +2,7 @@ import React from 'react'
 
 const LoginMessage = ({ user, setUser }) => {
   const logout = () => {
-    window.localStorage.removeItem('loggedBlogappUser')
+    window.localStorage.removeItem('loggedInUser')
     setUser(null)
   }
   if (!user)

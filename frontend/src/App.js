@@ -1,12 +1,18 @@
+// TODO: 
+// Add Create Watchlist form before Watchlists component
+// Look into using React Router for a separate Watchlist view page so that watchlists can become shareable
+// Implement Searching module as a separate view with the help of React Router
+
 import React, { useState, useEffect, useRef } from 'react'
 
-// import blogService from './services/blogs'
+import watchlistService from './services/watchlists'
 import loginService from './services/login'
 
 import Notification from './components/Notification'
 import LoginMessage from './components/LoginMessage'
 // import Toggleable from './components/Toggleable'
-// import Blogs from './components/Blogs'
+
+import Watchlists from './components/Watchlists'
 
 // import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
@@ -15,10 +21,13 @@ import SignupForm from './components/SignupForm'
 const App = () => {
   const [ user, setUser ] = useState(null)
 
-  // const [ blogs, setBlogs ] = useState([])
+  const [ watchlists, setWatchlists ] = useState([])
+  const [ instruments, setInstruments ] = useState([])
+
   const [ notification, setNotification ] = useState(null)
   const [ notificationType, setNotificationType ] = useState(null)
 
+  
   // const blogFormRef = useRef()
 
   const notificationHandler = (message, type) => {
@@ -83,19 +92,29 @@ const App = () => {
   //   }
   // }
 
-  // useEffect(() => {
-  //   blogService
-  //     .getData()
-  //     .then(data => {
-  //       setBlogs(data)
-  //     })
-  // }, [])
+  useEffect(() => {
+    watchlistService
+      .getInstrumentData()
+      .then(data => {
+        setInstruments(data)
+      })
+  }, [])
 
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem('loggedInUser')
     if (loggedInUser)
       setUser(JSON.parse(loggedInUser))
   }, [])
+
+  useEffect(() => {
+    if (user) {
+      watchlistService
+      .getUserWatchlistData(user)
+      .then(data => {
+        setWatchlists(data)
+      })
+    }
+  }, [user])
 
   return (
     <div>
@@ -110,9 +129,9 @@ const App = () => {
           <BlogForm createBlog={createBlog} />
         </Toggleable>
       } */}
-      {/* <div>
-        { user !== null? <Blogs blogs={blogs} handleLike={handleLike} removeBlog={removeBlog} user={user}/>: ''}
-      </div> */}
+      <div>
+        { user !== null? <Watchlists watchlists={watchlists} />: '' }
+      </div>
     </div>
   )
 }
