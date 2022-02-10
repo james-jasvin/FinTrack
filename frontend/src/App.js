@@ -10,7 +10,7 @@ import loginService from './services/login'
 
 import Notification from './components/Notification'
 import LoginMessage from './components/LoginMessage'
-// import Toggleable from './components/Toggleable'
+import Toggleable from './components/Toggleable'
 
 import Watchlists from './components/Watchlists'
 
@@ -19,17 +19,29 @@ import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 
 const App = () => {
+  // user state will store the logged in user object, if no login has been done yet then it will be null
   const [ user, setUser ] = useState(null)
 
+  // If no user is logged yet, then show login form by default and provide a button to switch to signup form if required
+  // Which form is displayed is controlled by the showLoginForm state, if true then show login form, else show signup form
+  const [ showLoginForm, setShowLoginForm ] = useState(true)
+
+  // Will store the watchlists of logged in user
   const [ watchlists, setWatchlists ] = useState([])
+
+  // Will store the instruments in the entire database
   const [ instruments, setInstruments ] = useState([])
 
+  // These states are used to control the notifications that show up at the top of the screen for events like login, signup, watchlist creation, etc.
   const [ notification, setNotification ] = useState(null)
   const [ notificationType, setNotificationType ] = useState(null)
 
   
   // const blogFormRef = useRef()
 
+  // Create a notification at the top of the screen with given message for 5 seconds 
+  // Notifications are of two types, "error" and "success"
+  // The appearance of these two notifications can be adjusted in the .css file
   const notificationHandler = (message, type) => {
     setNotification(message)
     setNotificationType(type)
@@ -119,16 +131,20 @@ const App = () => {
   return (
     <div>
       <h2> fintrack </h2>
-      <Notification notification={notification} type={notificationType}/>
+      <Notification notification={notification} type={notificationType} />
       <LoginMessage user={user} setUser={setUser}/>
-      { user === null && <LoginForm startLogin={handleLogin}/> }
-      { user === null && <SignupForm startSignup={handleLogin}/> }
+      
+      { user === null && showLoginForm && <LoginForm startLogin={handleLogin}/> }
+      { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin}/> }
+      { user === null && <button onClick={() => setShowLoginForm(!showLoginForm)}>{showLoginForm? 'signup instead': 'login instead'}</button> }
+
       {/* {
         user !== null &&
         <Toggleable buttonLabel={'create a blog'} ref={blogFormRef}>
           <BlogForm createBlog={createBlog} />
         </Toggleable>
       } */}
+
       <div>
         { user !== null? <Watchlists watchlists={watchlists} />: '' }
       </div>

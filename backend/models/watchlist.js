@@ -6,6 +6,7 @@ const watchlistSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
+	isMF: { type: Boolean, required: true },
 	instruments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

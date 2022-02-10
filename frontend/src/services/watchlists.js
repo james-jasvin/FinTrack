@@ -1,5 +1,5 @@
 // TODO: Update all URLs to match Express backend
-// Require backend route for searching by user id, like, /api/watchlists?user={user.id}
+// Require backend route for searching by user id, like, /api/watchlists?user={user.id} (populate watchlists with instrument data)
 // Also add token authentication to the above route
 
 import axios from 'axios'

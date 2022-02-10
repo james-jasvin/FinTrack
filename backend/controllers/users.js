@@ -8,9 +8,6 @@ const bcrypt = require('bcrypt')
 	- It is equivalent to a join operation in SQL DBs
 */
 userRouter.get('/', async (request, response) => {
-	// const users = await User.find({}).populate('watchlists', { id: 1, name: 1})
-	// For now, populate() call is commented out because watchlists schema hasn't been added to the 
-	// MongoDB cluster yet
 	const users = await User.find({})
 	response.json(users)
 })

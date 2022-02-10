@@ -5,12 +5,6 @@ const userSchema = new mongoose.Schema({
 	username: { type: String, required: true, minLength: 3, unique: true },
 	name: { type: String, required: true },
 	passwordHash: { type: String, required: true },
-	watchlists: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Watchlist'
-		}
-	]
 })
 
 /*
