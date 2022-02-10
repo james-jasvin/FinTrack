@@ -1,0 +1,24 @@
+* = API route requires token authentication for request to succeed
+
+GET /api/users/ => Return all users [Can be removed later as it exposes all user details]
+
+* POST /api/users/ => Create user with details given in request body
+
+* POST /api/login/ => Verify user login credentials which are given in request body
+
+GET /api/instruments => Get all instruments stored in DB
+
+* GET /api/watchlists?user={user.id} => Return all watchlists which have given user id in the query [Use find() method in Mongoose]
+
+* POST /api/watchlists => Create watchlist with data given in request body
+
+* DELETE /api/watchlists/{watchlist.id} => Delete watchlist with given id
+
+* POST /api/watchlistInstruments => Create watchlist instrument with given watchlist id and instrument id in request body
+
+* GET /api/watchlistInstruments?watchlistId={watchlist.id} => Return all watchlist instruments which belong to given watchlist id
+
+* DELETE /api/watchlistInstruments?watchlistId={watchlist.id} => Delete all instruments which belong to given watchlist id => Use deleteMany() Mongoose function
+[This request is required when a watchlist is deleted, so all its instruments also have to be deleted]
+
+* DELETE /api/watchlistInstruments?id={watchlistInstrument.id} => Delete the watchlist instrument with given id

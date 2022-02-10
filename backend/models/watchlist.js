@@ -6,13 +6,7 @@ const watchlistSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	isMF: { type: Boolean, required: true },
-	instruments: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Instrument'
-		}
-	]
+	isMF: { type: Boolean, required: true }
 })
 
 watchlistSchema.set('toJSON', {
@@ -23,4 +17,4 @@ watchlistSchema.set('toJSON', {
 	}
 })
 
-module.exports = mongoose.model('Blog', watchlistSchema)
+module.exports = mongoose.model('Watchlist', watchlistSchema)

@@ -38,7 +38,8 @@ const userExtractor = async (request, response, next) => {
 	const token = request.token
 
 	// This is to ensure that only those routes that are concerned with token-authentication
-	// like POST and DELETE use this middleware, GET routes are allowed to bypass this
+	// like POST and DELETE and the GET user watchlists routes use this middleware
+	// All other GET routes are allowed to bypass this
 	if (token === null)
 		return next()
 

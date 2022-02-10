@@ -9,8 +9,7 @@ const WatchlistForm = ({ createWatchlist }) => {
 
     const watchlist = {
       name,
-      isMF,
-      instruments: []
+      isMF
     }
 
     createWatchlist(watchlist)

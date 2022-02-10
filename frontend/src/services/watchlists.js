@@ -8,6 +8,8 @@ import axios from 'axios'
 const watchlistUrl = 'http://localhost:3001/watchlists'
 // const instrumentUrl = '/api/instruments/'
 const instrumentUrl = 'http://localhost:3001/instruments'
+// const instrumentUrl = '/api/watchlistInstruments/'
+const watchlistInstrumentUrl = 'http://localhost:3001/watchlistInstruments'
 
 let token = null
 
@@ -25,9 +27,17 @@ const getUserWatchlistData = async (user) => {
     }
   }
 
+  // Get watchlists of given user
   const response = await axios.get(`${watchlistUrl}?/user=${user.id}`, config)
+  const watchlists = response.data
 
-  return response.data
+  // For each watchlist, get the corresponding instruments in it and attach it as a list with property name "instruments"
+  watchlists.forEach(async (w, idx) => {
+    const cur_response = await axios.get(`${watchlistInstrumentUrl}?watchlistId=${w.id}`, config)
+    watchlists[idx].instruments = cur_response.data
+  })
+
+  return watchlists
 }
 
 const getInstrumentData = async () => {
@@ -35,7 +45,7 @@ const getInstrumentData = async () => {
   return response.data
 }
 
-const create = async (watchlist) => {
+const createWatchlist = async (watchlist) => {
   setToken()
   const config = {
     headers: {
@@ -44,7 +54,8 @@ const create = async (watchlist) => {
   }
 
   // TODO: This is temporary solution for json-server compatibility
-  // Once Express backend is configured, just remove this code snippet and the method should still work fine!
+  // Once Express backend is configured, just remove this code snippet and the method should still work fine because backend will user the token
+  // to verify authenticity instead of user id which is required for json-server
   const user = JSON.parse(window.localStorage.getItem('loggedInUser'))
   const tempWatchlist = {
     ...watchlist,
@@ -71,9 +82,12 @@ const deleteWatchlist = async (watchlist) => {
   }
 
   const response = await axios.delete(`${watchlistUrl}/${watchlist.id}`, config)
+  // Add request to delete WatchlistInstruments which have watchlistId=${watchlist.id}
+  // Something like, DELETE /api/watchlistInstruments?watchlistId=${watchlist.id}
+  // Use the deleteMany() function in Mongoose to achieve this in the backend
   return response.data
 }
 
-const exportObject = { getUserWatchlistData, getInstrumentData, create, deleteWatchlist }
+const exportObject = { getUserWatchlistData, getInstrumentData, createWatchlist, deleteWatchlist }
 
 export default exportObject

@@ -73,7 +73,10 @@ const App = () => {
   const createWatchlist = async (watchlistObject) => {
     try {
       watchlistFormRef.current.toggleVisibility()
-      const createdWatchlist = await watchlistService.create(watchlistObject)
+      const createdWatchlist = await watchlistService.createWatchlist(watchlistObject)
+
+      // Add empty list of instruments to the watchlist because it is not stored at the backend but is required at the frontend
+      createdWatchlist.instruments = []
 
       setWatchlists(watchlists.concat(createdWatchlist))
 
