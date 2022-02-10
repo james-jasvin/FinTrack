@@ -38,17 +38,27 @@ const getInstrumentData = async () => {
   return response.data
 }
 
-// const create = async (blog) => {
-//   setToken()
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`
-//     }
-//   }
+const create = async (watchlist) => {
+  setToken()
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
 
-//   const response = await axios.post(baseUrl, blog, config)
-//   return response.data
-// }
+  // TODO: This is temporary solution for json-server compatibility
+  // Once Express backend is configured, just remove this code snippet and the method should still work fine!
+  const user = JSON.parse(window.localStorage.getItem('loggedInUser'))
+  const tempWatchlist = {
+    ...watchlist,
+    "user": user.id
+  }
+
+  // Uncomment this line once backend is ready
+  // const response = await axios.post(watchlistUrl, watchlist, config)
+  const response = await axios.post(watchlistUrl, tempWatchlist, config)
+  return response.data
+}
 
 // const update = async (blog) => {
 //   const response = await axios.put(`${baseUrl}/${blog.id}`, blog)
@@ -67,6 +77,6 @@ const getInstrumentData = async () => {
 //   return response.data
 // }
 
-const exportObject = { getUserWatchlistData, getInstrumentData }
+const exportObject = { getUserWatchlistData, getInstrumentData, create }
 
 export default exportObject

@@ -1,7 +1,9 @@
 // TODO: 
-// Add Create Watchlist form before Watchlists component
+// Add Delete Watchlist option
+// Add delete instruments from a particular Watchlist option
 // Look into using React Router for a separate Watchlist view page so that watchlists can become shareable
 // Implement Searching module as a separate view with the help of React Router
+// Or you can implement Searching as a component of a Watchlist itself
 
 import React, { useState, useEffect, useRef } from 'react'
 
@@ -14,7 +16,7 @@ import Toggleable from './components/Toggleable'
 
 import Watchlists from './components/Watchlists'
 
-// import BlogForm from './components/BlogForm'
+import WatchlistForm from './components/WatchlistForm'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 
@@ -36,8 +38,7 @@ const App = () => {
   const [ notification, setNotification ] = useState(null)
   const [ notificationType, setNotificationType ] = useState(null)
 
-  
-  // const blogFormRef = useRef()
+  const watchlistFormRef = useRef()
 
   // Create a notification at the top of the screen with given message for 5 seconds 
   // Notifications are of two types, "error" and "success"
@@ -69,19 +70,19 @@ const App = () => {
     }
   }
 
-  // const createBlog = async (blogObject) => {
-  //   try {
-  //     blogFormRef.current.toggleVisibility()
-  //     const createdBlog = await blogService.create(blogObject)
+  const createWatchlist = async (watchlistObject) => {
+    try {
+      watchlistFormRef.current.toggleVisibility()
+      const createdWatchlist = await watchlistService.create(watchlistObject)
 
-  //     setBlogs(blogs.concat(createdBlog))
+      setWatchlists(watchlists.concat(createdWatchlist))
 
-  //     notificationHandler(`a new blog "${createdBlog.title}" by ${createdBlog.author} has been added successfully`, 'success')
-  //   }
-  //   catch (exception) {
-  //     notificationHandler(exception.response.data.error, 'error')
-  //   }
-  // }
+      notificationHandler(`a new ${createdWatchlist.isMF? 'MF':'stocks'} watchlist "${createdWatchlist.name}" has been successfully created`, 'success')
+    }
+    catch (exception) {
+      notificationHandler(exception.response.data.error, 'error')
+    }
+  }
 
   // const handleLike = async (blogObject) => {
   //   try {
@@ -138,12 +139,12 @@ const App = () => {
       { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin}/> }
       { user === null && <button onClick={() => setShowLoginForm(!showLoginForm)}>{showLoginForm? 'signup instead': 'login instead'}</button> }
 
-      {/* {
+      {
         user !== null &&
-        <Toggleable buttonLabel={'create a blog'} ref={blogFormRef}>
-          <BlogForm createBlog={createBlog} />
+        <Toggleable buttonLabel={'create a watchlist'} ref={watchlistFormRef}>
+          <WatchlistForm createWatchlist={createWatchlist} />
         </Toggleable>
-      } */}
+      }
 
       <div>
         { user !== null? <Watchlists watchlists={watchlists} />: '' }

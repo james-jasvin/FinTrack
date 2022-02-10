@@ -25,15 +25,15 @@ const SignupForm = ({ startSignup }) => {
       <h3>signup</h3>
       <form onSubmit={handleSignup} id='signup-form'>
         <div>
-          username: <input value={username} onChange={event => setUsername(event.target.value)} type='text' id='signup-username'/>
+          username: <input value={username} onChange={event => setUsername(event.target.value)} type='text' id='signup-username' required/>
         </div>
 
         <div>
-          password: <input value={password} onChange={event => setPassword(event.target.value)} type='password' id='signup-password'/>
+          password: <input value={password} onChange={event => setPassword(event.target.value)} type='password' id='signup-password' required/>
         </div>
 
         <div>
-          name: <input value={name} onChange={event => setName(event.target.value)} type='text' id='signup-name'/>
+          name: <input value={name} onChange={event => setName(event.target.value)} type='text' id='signup-name' required/>
         </div>
 
         <button type='submit' id='signup-submit'>signup</button>

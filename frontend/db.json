@@ -64,6 +64,20 @@
           "url": "https://www.tickertape.in/mutualfunds/axis-bluechip-fund-M_AXLB"
         }
       ]
+    },
+    {
+      "name": "New MFs",
+      "isMF": true,
+      "instruments": [],
+      "user": "61f0418cfe24a23454d47500",
+      "id": "81mBWSb"
+    },
+    {
+      "name": "New Stocks",
+      "isMF": false,
+      "instruments": [],
+      "user": "61f0418cfe24a23454d47500",
+      "id": "GGHhs1u"
     }
   ]
 }
