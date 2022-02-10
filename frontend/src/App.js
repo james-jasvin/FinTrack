@@ -94,16 +94,16 @@ const App = () => {
   //   }
   // }
 
-  // const removeBlog = async (blogObject) => {
-  //   try {
-  //     await blogService.deleteBlog(blogObject)
-  //     setBlogs(blogs.filter(blog => blog.id !== blogObject.id))
-  //     notificationHandler(`Successfully deleted the blog entry for ${blogObject.title} by ${blogObject.author}`, 'success')
-  //   }
-  //   catch (exception) {
-  //     notificationHandler(exception.response.data.error, 'error')
-  //   }
-  // }
+  const removeWatchlist = async (watchlistObject) => {
+    try {
+      await watchlistService.deleteWatchlist(watchlistObject)
+      setWatchlists(watchlists.filter(watchlist => watchlist.id !== watchlistObject.id))
+      notificationHandler(`Successfully deleted the "${watchlistObject.name}" watchlist`, 'success')
+    }
+    catch (exception) {
+      notificationHandler(exception.response.data.error, 'error')
+    }
+  }
 
   useEffect(() => {
     watchlistService
@@ -147,7 +147,7 @@ const App = () => {
       }
 
       <div>
-        { user !== null? <Watchlists watchlists={watchlists} />: '' }
+        { user !== null? <Watchlists watchlists={watchlists} removeWatchlist={removeWatchlist}/>: '' }
       </div>
     </div>
   )

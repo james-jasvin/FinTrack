@@ -9,9 +9,6 @@ const watchlistUrl = 'http://localhost:3001/watchlists'
 // const instrumentUrl = '/api/instruments/'
 const instrumentUrl = 'http://localhost:3001/instruments'
 
-
-// const baseUrl = 'http://localhost:3001/'
-
 let token = null
 
 const setToken = () => {
@@ -65,18 +62,18 @@ const create = async (watchlist) => {
 //   return response.data
 // }
 
-// const deleteBlog = async (blog) => {
-//   setToken()
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`
-//     }
-//   }
+const deleteWatchlist = async (watchlist) => {
+  setToken()
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
 
-//   const response = await axios.delete(`${baseUrl}/${blog.id}`, config)
-//   return response.data
-// }
+  const response = await axios.delete(`${watchlistUrl}/${watchlist.id}`, config)
+  return response.data
+}
 
-const exportObject = { getUserWatchlistData, getInstrumentData, create }
+const exportObject = { getUserWatchlistData, getInstrumentData, create, deleteWatchlist }
 
 export default exportObject

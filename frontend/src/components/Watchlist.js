@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import WatchlistInstrument from './WatchlistInstrument'
 
-const Watchlist = ({ watchlist }) => {
+const Watchlist = ({ watchlist, removeWatchlist }) => {
   const [ visibility, setVisibility ] = useState(false)
   const toggleVisibility = () => setVisibility(!visibility)
 
+  // If no watchlist has been loaded yet, then return null immediately to avoid errors
   if (!watchlist)
     return null
 
@@ -24,33 +25,38 @@ const Watchlist = ({ watchlist }) => {
   //   handleLike(updatedBlog)
   // }
 
-  // const deleteBlog = () => {
-  //   const result = window.confirm(`You're about to delete the blog entry, ${blog.title} by ${blog.author}`)
-  //   if (result)
-  //     removeBlog(blog)
-  // }
+  const deleteWatchlist = () => {
+    const result = window.confirm(`You're about to delete the "${watchlist.name}" watchlist`)
+    if (result)
+      removeWatchlist(watchlist)
+  }
 
   return (
     <div className='watchlist' style={watchlistStyle}>
-      <div className='watchlist-header'>{watchlist.name}<button onClick={toggleVisibility} className='visibility-button'>{visibility? 'hide': 'view'}</button></div>
+      <div className='watchlist-header'>
+        {watchlist.name}
+        <button onClick={toggleVisibility} className='visibility-button'>
+          {visibility? 'hide': 'view'}
+        </button>
+      </div>
+      {/* TODO: Share Button can be placed here */}
       <div className='watchlist-details'>
         {
           visibility &&
                 <div>
-                  {/* TODO: <li>Share Button can be placed here </li> */}
-
-                  { watchlist['instruments'].map(instrument => <WatchlistInstrument instrument={instrument} key={instrument.id} />) }
+                  {
+                    watchlist.instruments.length > 0?
+                      watchlist.instruments.map(instrument => <WatchlistInstrument instrument={instrument} key={instrument.id} />):
+                      'No instruments added to this watchlist yet'
+                  }
 
                   {/* <li>likes: <span>{blog.likes}</span><button onClick={updateLikes} className='like-button'>like</button></li>
                   <li>user: <span>{blog.user.name}</span></li> */}
                 </div>
         }
-        {/* {
-          user.username === blog.user.username &&
-            <div>
-              <button onClick={deleteBlog} className='remove-button'>remove</button>
-            </div>
-        } */}
+        <div>
+          <button onClick={deleteWatchlist} id='delete-watchlist' className='remove-button'>delete</button>
+        </div>
       </div>
     </div>
   )
