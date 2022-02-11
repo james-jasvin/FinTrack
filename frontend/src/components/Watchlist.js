@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import WatchlistInstrument from './WatchlistInstrument'
 
-const Watchlist = ({ watchlist, removeWatchlist }) => {
+const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) => {
   const [ visibility, setVisibility ] = useState(false)
   const toggleVisibility = () => setVisibility(!visibility)
 
@@ -34,7 +34,7 @@ const Watchlist = ({ watchlist, removeWatchlist }) => {
   return (
     <div className='watchlist' style={watchlistStyle}>
       <div className='watchlist-header'>
-        {watchlist.name}
+        {watchlist.name} - {watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}
         <button onClick={toggleVisibility} className='visibility-button'>
           {visibility? 'hide': 'view'}
         </button>
@@ -46,8 +46,16 @@ const Watchlist = ({ watchlist, removeWatchlist }) => {
                 <div>
                   {
                     watchlist.instruments.length > 0?
-                      watchlist.instruments.map(instrument => <WatchlistInstrument instrument={instrument} key={instrument.id} />):
-                      'No instruments added to this watchlist yet'
+                      watchlist.instruments.map(
+                        instrument => 
+                        <WatchlistInstrument 
+                          watchlist={watchlist}
+                          instrument={instrument}
+                          key={instrument.id}
+                          removeWatchlistInstrument={removeWatchlistInstrument}
+                        />
+                      )
+                      : 'No instruments added to this watchlist yet'
                   }
 
                   {/* <li>likes: <span>{blog.likes}</span><button onClick={updateLikes} className='like-button'>like</button></li>
@@ -55,7 +63,7 @@ const Watchlist = ({ watchlist, removeWatchlist }) => {
                 </div>
         }
         <div>
-          <button onClick={deleteWatchlist} id='delete-watchlist' className='remove-button'>delete</button>
+          <button onClick={deleteWatchlist} className='delete-watchlist remove-button'>delete</button>
         </div>
       </div>
     </div>

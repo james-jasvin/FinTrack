@@ -1,6 +1,12 @@
 import React from 'react'
 
-const WatchlistInstrument = ({ instrument }) => {
+const WatchlistInstrument = ({ watchlist, instrument, removeWatchlistInstrument }) => {
+
+  const deleteWatchlistInstrument = () => {
+    const result = window.confirm(`You're about to delete "${instrument.symbol}" from your watchlist "${watchlist.name}"`)
+    if (result)
+      removeWatchlistInstrument(instrument, watchlist)
+  }
 
   const listStyle = {
     listStyleType: 'none'
@@ -12,6 +18,7 @@ const WatchlistInstrument = ({ instrument }) => {
         <li>{instrument.symbol}</li>
         <li>{instrument.name}</li>
         <li>{instrument.url}</li>
+        <li><button onClick={deleteWatchlistInstrument} className='delete-watchlist-instrument remove-button'>delete</button></li>
       </ul>
     </div>
   )

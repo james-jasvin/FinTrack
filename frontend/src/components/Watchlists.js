@@ -1,7 +1,7 @@
 import React from 'react'
 import Watchlist from './Watchlist'
 
-const Watchlists = ({ watchlists, removeWatchlist }) => {  
+const Watchlists = ({ watchlists, removeWatchlist, removeWatchlistInstrument }) => {  
   if (watchlists === [])
     return null
 
@@ -20,7 +20,7 @@ const Watchlists = ({ watchlists, removeWatchlist }) => {
 
   return (
     <div>
-      { watchlists.map(w => <Watchlist watchlist={w} key={w.id} removeWatchlist={removeWatchlist}/> )}
+      { watchlists.map(w => <Watchlist watchlist={w} key={w.id} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} /> )}
     </div>
   )
 }

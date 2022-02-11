@@ -88,6 +88,21 @@ const deleteWatchlist = async (watchlist) => {
   return response.data
 }
 
-const exportObject = { getUserWatchlistData, getInstrumentData, createWatchlist, deleteWatchlist }
+const deleteWatchlistInstrument = async (watchlistInstrument) => {
+  setToken()
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const response = await axios.delete(`${watchlistInstrumentUrl}/${watchlistInstrument.id}`, config)
+  // Add request to delete WatchlistInstruments which have watchlistId=${watchlist.id}
+  // Something like, DELETE /api/watchlistInstruments?watchlistId=${watchlist.id}
+  // Use the deleteMany() function in Mongoose to achieve this in the backend
+  return response.data
+}
+
+const exportObject = { getUserWatchlistData, getInstrumentData, createWatchlist, deleteWatchlist, deleteWatchlistInstrument }
 
 export default exportObject

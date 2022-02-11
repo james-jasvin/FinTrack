@@ -108,6 +108,24 @@ const App = () => {
     }
   }
 
+  const removeWatchlistInstrument = async (watchlistInstrumentObject, watchlist) => {
+    try {
+      await watchlistService.deleteWatchlistInstrument(watchlistInstrumentObject)
+
+      setWatchlists(
+        watchlists.map(
+          w => w.id !== watchlist.id? 
+          w
+          : {...w, instruments: w.instruments.filter(ins => ins.id !== watchlistInstrumentObject.id) }
+      ))
+
+      notificationHandler(`Successfully removed "${watchlistInstrumentObject.symbol}" from watchlist "${watchlist.name}"`, 'success')
+    }
+    catch (exception) {
+      notificationHandler(exception.response.data.error, 'error')
+    }
+  }
+
   useEffect(() => {
     watchlistService
       .getInstrumentData()
@@ -150,7 +168,7 @@ const App = () => {
       }
 
       <div>
-        { user !== null? <Watchlists watchlists={watchlists} removeWatchlist={removeWatchlist}/>: '' }
+        { user !== null? <Watchlists watchlists={watchlists} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} />: '' }
       </div>
     </div>
   )

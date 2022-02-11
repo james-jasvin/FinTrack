@@ -44,11 +44,10 @@
       "isMF": true
     },
     {
-      "name": "New Stocks",
-      "isMF": false,
-      "instruments": [],
+      "name": "New MFs",
+      "isMF": true,
       "user": "61f0418cfe24a23454d47500",
-      "id": "zadezBa"
+      "id": "S8nNrud"
     }
   ],
   "watchlistInstruments": [
