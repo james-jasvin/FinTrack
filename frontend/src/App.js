@@ -1,9 +1,6 @@
 // TODO: 
-// Add Delete Watchlist option
-// Add delete instruments from a particular Watchlist option
-// Look into using React Router for a separate Watchlist view page so that watchlists can become shareable
+// Separate Watchlist view page so that watchlists can become shareable => useRouteMatch() Hook will help
 // Implement Searching module as a separate view with the help of React Router
-// Or you can implement Searching as a component of a Watchlist itself
 
 import React, { useState, useEffect, useRef } from 'react'
 
@@ -19,6 +16,10 @@ import Watchlists from './components/Watchlists'
 import WatchlistForm from './components/WatchlistForm'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
+
+import { 
+  Switch, Route, Link
+} from 'react-router-dom'
 
 const App = () => {
   // user state will store the logged in user object, if no login has been done yet then it will be null
@@ -38,6 +39,11 @@ const App = () => {
   const [ notification, setNotification ] = useState(null)
   const [ notificationType, setNotificationType ] = useState(null)
 
+  const padding = {
+    padding: 5
+  }
+
+  // A useRef hook to attach to Watchlist Form component, so that we can toggle the visibility of the form on and off
   const watchlistFormRef = useRef()
 
   // Create a notification at the top of the screen with given message for 5 seconds 
@@ -161,15 +167,31 @@ const App = () => {
       { user === null && <button onClick={() => setShowLoginForm(!showLoginForm)}>{showLoginForm? 'signup instead': 'login instead'}</button> }
 
       {
-        user !== null &&
-        <Toggleable buttonLabel={'create a watchlist'} ref={watchlistFormRef}>
-          <WatchlistForm createWatchlist={createWatchlist} />
-        </Toggleable>
+        user !== null && 
+        <div>
+          <Link style={padding} to="/">home</Link>
+          <Link style={padding} to="/search">search</Link>
+        </div>
       }
 
-      <div>
-        { user !== null? <Watchlists watchlists={watchlists} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} />: '' }
-      </div>
+      {
+        user !== null &&
+        <Switch>
+          <Route path="/search">
+            <></>
+          </Route>
+
+          <Route path="/">
+            <Toggleable buttonLabel={'create a watchlist'} ref={watchlistFormRef}>
+              <WatchlistForm createWatchlist={createWatchlist} />
+            </Toggleable>
+
+            <Watchlists watchlists={watchlists} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} />
+          </Route>
+
+        </Switch>  
+      }
+
     </div>
   )
 }
