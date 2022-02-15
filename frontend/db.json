@@ -48,32 +48,59 @@
       "isMF": true,
       "user": "61f0418cfe24a23454d47500",
       "id": "S8nNrud"
+    },
+    {
+      "name": "YAWL",
+      "isMF": false,
+      "user": "61f0418cfe24a23454d47500",
+      "id": "qlSNaBN"
     }
   ],
   "watchlistInstruments": [
     {
-      "id": "1",
-      "watchlistId": "1",
-      "instrumentId": "1",
-      "symbol": "TCS",
-      "name": "Tata Consultancy Services",
-      "url": "https://www.tickertape.in/stocks/tata-consultancy-services-TCS?"
-    },
-    {
-      "id": "2",
-      "watchlistId": "1",
-      "instrumentId": "2",
-      "symbol": "INFY",
-      "name": "Infosys",
-      "url": "https://www.tickertape.in/stocks/infosys-INFY?"
-    },
-    {
-      "id": "3",
-      "watchlistId": "2",
-      "instrumentId": "3",
       "symbol": "M_AXLB",
       "name": "Axis Bluechip Fund",
-      "url": "https://www.tickertape.in/mutualfunds/axis-bluechip-fund-M_AXLB"
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/axis-bluechip-fund-M_AXLB",
+      "instrumentId": "3",
+      "watchlistId": "2",
+      "id": "dJUWiyE"
+    },
+    {
+      "symbol": "M_AXLB",
+      "name": "Axis Bluechip Fund",
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/axis-bluechip-fund-M_AXLB",
+      "instrumentId": "3",
+      "watchlistId": "S8nNrud",
+      "id": "W-04OAQ"
+    },
+    {
+      "symbol": "INFY",
+      "name": "Infosys",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/infosys-INFY?",
+      "instrumentId": "2",
+      "watchlistId": "1",
+      "id": "XQrdip8"
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/tata-consultancy-services-TCS?",
+      "instrumentId": "1",
+      "watchlistId": "1",
+      "id": "9EHcPaU"
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/tata-consultancy-services-TCS?",
+      "instrumentId": "1",
+      "watchlistId": "qlSNaBN",
+      "id": "5zscmSk"
     }
   ]
 }

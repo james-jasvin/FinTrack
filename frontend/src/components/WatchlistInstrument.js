@@ -13,7 +13,7 @@ const WatchlistInstrument = ({ watchlist, instrument, removeWatchlistInstrument 
   }
 
   return (
-    <div className='instrument'>
+    <div className='watchlist-instrument'>
       <ul style={listStyle}>
         <li>{instrument.symbol}</li>
         <li>{instrument.name}</li>

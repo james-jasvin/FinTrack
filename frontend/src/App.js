@@ -1,6 +1,5 @@
 // TODO: 
 // Separate Watchlist view page so that watchlists can become shareable => useRouteMatch() Hook will help
-// Implement Searching module as a separate view with the help of React Router
 
 import React, { useState, useEffect, useRef } from 'react'
 
@@ -20,6 +19,7 @@ import SignupForm from './components/SignupForm'
 import { 
   Switch, Route, Link
 } from 'react-router-dom'
+import Search from './components/Search'
 
 const App = () => {
   // user state will store the logged in user object, if no login has been done yet then it will be null
@@ -121,11 +121,31 @@ const App = () => {
       setWatchlists(
         watchlists.map(
           w => w.id !== watchlist.id? 
-          w
-          : {...w, instruments: w.instruments.filter(ins => ins.id !== watchlistInstrumentObject.id) }
+          w:
+          {...w, instruments: w.instruments.filter(ins => ins.id !== watchlistInstrumentObject.id) }
       ))
 
       notificationHandler(`Successfully removed "${watchlistInstrumentObject.symbol}" from watchlist "${watchlist.name}"`, 'success')
+    }
+    catch (exception) {
+      notificationHandler(exception.response.data.error, 'error')
+    }
+  }
+
+  const addToWatchlist = async (watchlist, watchlistInstrument) => {
+    try {
+      const addedWatchlistInstrument = await watchlistService.addWatchlistInstrument(watchlistInstrument)
+
+      // Append newly added instrument to the respective watchlist so that the frontend reflects the new state
+      // Note that we attach the object that was returned by the backend instead of watchlistInstrument passed to the function
+      setWatchlists(
+        watchlists.map(
+          w => w.id !== watchlist.id? 
+          w:
+          {...w, instruments: w.instruments.concat(addedWatchlistInstrument) }
+      ))
+
+      notificationHandler(`Successfully added "${watchlistInstrument.symbol}" to watchlist "${watchlist.name}"`, 'success')
     }
     catch (exception) {
       notificationHandler(exception.response.data.error, 'error')
@@ -178,7 +198,7 @@ const App = () => {
         user !== null &&
         <Switch>
           <Route path="/search">
-            <></>
+            <Search instruments={instruments} watchlists={watchlists} addToWatchlist={addToWatchlist}/>
           </Route>
 
           <Route path="/">
