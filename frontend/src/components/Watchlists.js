@@ -17,7 +17,6 @@ const Watchlists = ({ watchlists, removeWatchlist, removeWatchlistInstrument }) 
 
   // console.log(watchlists)
 
-
   return (
     <div>
       { watchlists.map(w => <Watchlist watchlist={w} key={w.id} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} /> )}

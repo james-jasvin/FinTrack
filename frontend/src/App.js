@@ -1,5 +1,11 @@
 // TODO: 
-// Separate Watchlist view page so that watchlists can become shareable => useRouteMatch() Hook will help
+// Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
+// Think of possibilities where elements can be deleted at backend but still appear at frontend, not added at frontend but already added at backend
+
+// Topic of discussion, should users be able to view shared watchlists without logging in to an account?
+// If yes, then GET watchlistInstruments and GET watchlists routes have to function without authentication
+// If no, then current implementation works as it should
+
 
 import React, { useState, useEffect, useRef } from 'react'
 
@@ -11,15 +17,17 @@ import LoginMessage from './components/LoginMessage'
 import Toggleable from './components/Toggleable'
 
 import Watchlists from './components/Watchlists'
+import Watchlist from './components/Watchlist'
+import Search from './components/Search'
 
 import WatchlistForm from './components/WatchlistForm'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 
 import { 
-  Switch, Route, Link
+  Switch, Route, Link, useRouteMatch
 } from 'react-router-dom'
-import Search from './components/Search'
+
 
 const App = () => {
   // user state will store the logged in user object, if no login has been done yet then it will be null
@@ -31,6 +39,9 @@ const App = () => {
 
   // Will store the watchlists of logged in user
   const [ watchlists, setWatchlists ] = useState([])
+
+  // Will store the watchlist of single watchlist view page
+  const [ watchlist, setWatchlist ] = useState(null)
 
   // Will store the instruments in the entire database
   const [ instruments, setInstruments ] = useState([])
@@ -45,6 +56,11 @@ const App = () => {
 
   // A useRef hook to attach to Watchlist Form component, so that we can toggle the visibility of the form on and off
   const watchlistFormRef = useRef()
+
+  // A useRouteMatch that will check whether the current page's route matches the pattern /watchlists/:id
+  // match = Object that contains various information about route matched including the "id" in path, if route matched successfully
+  // Else, match = null
+  const match = useRouteMatch('/watchlists/:id')
 
   // Create a notification at the top of the screen with given message for 5 seconds 
   // Notifications are of two types, "error" and "success"
@@ -92,16 +108,6 @@ const App = () => {
       notificationHandler(exception.response.data.error, 'error')
     }
   }
-
-  // const handleLike = async (blogObject) => {
-  //   try {
-  //     await blogService.update(blogObject)
-  //     setBlogs(blogs.map(blog => blog.id === blogObject.id? blogObject: blog))
-  //   }
-  //   catch (exception) {
-  //     notificationHandler(exception.response.data.error, 'error')
-  //   }
-  // }
 
   const removeWatchlist = async (watchlistObject) => {
     try {
@@ -176,6 +182,20 @@ const App = () => {
     }
   }, [user])
 
+  // Fetch specific watchlist data only if we are single watchlist view mode, i.e. /watchlists/:id route, so match !== null
+  // Providing "match" as a parameter in the dependency array of the useEffect hook results in an infinite loop of getWatchlistData() being called
+  // and crashing the system, so that's why dependency array is kept as empty
+  useEffect(() => {
+    if (match) {
+      watchlistService
+      .getWatchlistData(match.params.id)
+      .then(data => {
+        setWatchlist(data)
+      })
+    }
+  }, [])
+  
+
   return (
     <div>
       <h2> fintrack </h2>
@@ -197,6 +217,10 @@ const App = () => {
       {
         user !== null &&
         <Switch>
+          <Route path='/watchlists/:id'>
+            <Watchlist watchlist={watchlist} removeWatchlist={null} removeWatchlistInstrument={null} />
+          </Route>
+
           <Route path="/search">
             <Search instruments={instruments} watchlists={watchlists} addToWatchlist={addToWatchlist}/>
           </Route>

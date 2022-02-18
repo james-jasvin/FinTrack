@@ -16,9 +16,11 @@ GET /api/instruments => Get all instruments stored in DB
 
 * POST /api/watchlistInstruments => Create watchlist instrument with given watchlist id and instrument id in request body
 
-* GET /api/watchlistInstruments?watchlistId={watchlist.id} => Return all watchlist instruments which belong to given watchlist id
+* GET /api/watchlistInstruments?watchlistId={watchlist.id} => Return all watchlist instruments which belong to given watchlist id => Use find() + Call populate() on Instrument attributes while returning
 
 * DELETE /api/watchlistInstruments?watchlistId={watchlist.id} => Delete all instruments which belong to given watchlist id => Use deleteMany() Mongoose function
 [This request is required when a watchlist is deleted, so all its instruments also have to be deleted]
 
 * DELETE /api/watchlistInstruments?id={watchlistInstrument.id} => Delete the watchlist instrument with given id
+
+* GET /api/watchlists/id => Return watchlist data with given id

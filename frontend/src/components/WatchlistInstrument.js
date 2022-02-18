@@ -18,7 +18,15 @@ const WatchlistInstrument = ({ watchlist, instrument, removeWatchlistInstrument 
         <li>{instrument.symbol}</li>
         <li>{instrument.name}</li>
         <li>{instrument.url}</li>
-        <li><button onClick={deleteWatchlistInstrument} className='delete-watchlist-instrument remove-button'>delete</button></li>
+        {
+          // Only show option to delete watchlist instrument if owner of watchlist is viewing
+          // This can be checked as, removeWatchlistInstrument is null if non-owner is viewing and non-null otherwise
+          removeWatchlistInstrument &&
+          <li>
+            <button onClick={deleteWatchlistInstrument} className='delete-watchlist-instrument remove-button'>delete</button>
+          </li>
+        }
+        
       </ul>
     </div>
   )

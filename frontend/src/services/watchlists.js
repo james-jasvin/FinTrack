@@ -18,6 +18,31 @@ const setToken = () => {
   token = user.token
 }
 
+const getWatchlistData = async (watchlistId) => {
+  setToken()
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  // Fetch given watchlist data
+  let response = await axios.get(`${watchlistUrl}/${watchlistId}`, config)
+
+  // If invalid watchlist id was supplied then return null as the watchlist data
+  if (response.status === 404)
+    return null
+
+  const watchlist = response.data
+
+  // Fetch watchlist instruments data
+  response = await axios.get(`${watchlistInstrumentUrl}?watchlistId=${watchlistId}`, config) 
+  watchlist.instruments = response.data
+
+  return watchlist
+}
+
 const getUserWatchlistData = async (user) => {
   setToken()
 
@@ -114,6 +139,6 @@ const addWatchlistInstrument = async (watchlistInstrument) => {
   return response.data
 }
 
-const exportObject = { getUserWatchlistData, getInstrumentData, createWatchlist, deleteWatchlist, deleteWatchlistInstrument, addWatchlistInstrument }
+const exportObject = { getWatchlistData, getUserWatchlistData, getInstrumentData, createWatchlist, deleteWatchlist, deleteWatchlistInstrument, addWatchlistInstrument }
 
 export default exportObject
