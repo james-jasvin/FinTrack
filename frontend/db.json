@@ -28,6 +28,34 @@
       "name": "Axis Bluechip Fund",
       "isMF": true,
       "url": "https://www.tickertape.in/mutualfunds/axis-bluechip-fund-M_AXLB"
+    },
+    {
+      "id": "4",
+      "symbol": "SBIN",
+      "name": "State Bank of India",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/state-bank-of-india-SBI?"
+    },
+    {
+      "id": "5",
+      "symbol": "LT",
+      "name": "Larsen & Toubro Ltd",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/larsen-and-toubro-LART?"
+    },
+    {
+      "id": "6",
+      "symbol": "M_TADL",
+      "name": "Tata Digital India Fund - Growth",
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/tata-digital-india-fund-M_TADL?"
+    },
+    {
+      "id": "7",
+      "symbol": "M_PARO",
+      "name": "Parag Parikh Flexi Cap Fund - Growth",
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/parag-parikh-flexi-cap-fund-M_PARO?"
     }
   ],
   "watchlists": [
@@ -92,6 +120,42 @@
       "instrumentId": "3",
       "watchlistId": "S8nNrud",
       "id": "o2AShT8"
+    },
+    {
+      "symbol": "M_TADL",
+      "name": "Tata Digital India Fund - Growth",
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/tata-digital-india-fund-M_TADL?",
+      "instrumentId": "6",
+      "watchlistId": "2",
+      "id": "NrlZais"
+    },
+    {
+      "symbol": "M_PARO",
+      "name": "Parag Parikh Flexi Cap Fund - Growth",
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/parag-parikh-flexi-cap-fund-M_PARO?",
+      "instrumentId": "7",
+      "watchlistId": "2",
+      "id": "Y3CK3W5"
+    },
+    {
+      "symbol": "M_TADL",
+      "name": "Tata Digital India Fund - Growth",
+      "isMF": true,
+      "url": "https://www.tickertape.in/mutualfunds/tata-digital-india-fund-M_TADL?",
+      "instrumentId": "6",
+      "watchlistId": "S8nNrud",
+      "id": "H73HsPM"
+    },
+    {
+      "symbol": "LT",
+      "name": "Larsen & Toubro Ltd",
+      "isMF": false,
+      "url": "https://www.tickertape.in/stocks/larsen-and-toubro-LART?",
+      "instrumentId": "5",
+      "watchlistId": "qlSNaBN",
+      "id": "f40TFC_"
     }
   ]
 }

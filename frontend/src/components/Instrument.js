@@ -9,6 +9,7 @@ const Instrument = ({ watchlists, instrument, addToWatchlist }) => {
   const createWatchlistInstrument = (event) => {
     const watchlistIdx = event.target.value
     
+    // If watchlistIdx == -1 => User clicked on "Select a watchlist" option, in which case no further action should be done and changes should not be reflected
     if (watchlistIdx === -1)
       return
 
@@ -26,8 +27,13 @@ const Instrument = ({ watchlists, instrument, addToWatchlist }) => {
 
     const result = window.confirm(`Do you want to add ${instrument.symbol} to the watchlist ${watchlist.name}?`)
     if (result) {
+      // Set selectedWatchlist option so that its displayed to the user on the frontend
       setSelectedWatchlist(watchlistIdx)
+
       addToWatchlist(watchlist, watchlistInstrument)
+
+      // Reset selectedWatchlist option to -1, so that default option of "Select a watchlist" will be displayed and user can again select more options
+      setSelectedWatchlist(-1)
     }
   }
 
