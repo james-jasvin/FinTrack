@@ -2,6 +2,8 @@
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
 // Think of possibilities where elements can be deleted at backend but still appear at frontend, not added at frontend but already added at backend
 
+// Fetch stock and MF prices from public APIs => CORS issue right now => Find public stock + MF API that provides access with API keys
+
 // Topic of discussion, should users be able to view shared watchlists without logging in to an account?
 // If yes, then GET watchlistInstruments and GET watchlists routes have to function without authentication
 // If no, then current implementation works as it should
@@ -186,14 +188,12 @@ const App = () => {
   // Providing "match" as a parameter in the dependency array of the useEffect hook results in an infinite loop of getWatchlistData() being called
   // and crashing the system, so that's why dependency array is kept as empty
   useEffect(() => {
-    if (match) {
+    if (match && user !== null) {
       watchlistService
       .getWatchlistData(match.params.id)
-      .then(data => {
-        setWatchlist(data)
-      })
+      .then(data => setWatchlist(data))
     }
-  }, [])
+  }, [user])
   
 
   return (

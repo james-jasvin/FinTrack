@@ -11,6 +11,9 @@ const instrumentUrl = 'http://localhost:3001/instruments'
 // const instrumentUrl = '/api/watchlistInstruments/'
 const watchlistInstrumentUrl = 'http://localhost:3001/watchlistInstruments'
 
+// const ttStockPriceUrl = 'https://quotes-api.tickertape.in/quotes?sids='
+// const ttMFPriceUrl = 'https://api.tickertape.in/mutualfunds/'  // Example of complete URL: https://api.tickertape.in/mutualfunds/M_TAIM/info
+
 let token = null
 
 const setToken = () => {
@@ -56,10 +59,28 @@ const getUserWatchlistData = async (user) => {
   const response = await axios.get(`${watchlistUrl}?/user=${user.id}`, config)
   const watchlists = response.data
 
+
   // For each watchlist, get the corresponding instruments in it and attach it as a list with property name "instruments"
   watchlists.forEach(async (w, idx) => {
     const cur_response = await axios.get(`${watchlistInstrumentUrl}?watchlistId=${w.id}`, config)
     watchlists[idx].instruments = cur_response.data
+
+    // This section fetches instrument price data from external APIs but there's CORS issues right now, so commented it out
+    // watchlists[idx].instruments.forEach(async (ins, index) => {
+    //   let tt_response = null
+    //   if (ins.isMF) {
+    //     // tt_response = await axios.get(ttMFPriceUrl + `${ins.symbol}/info`)
+    //     tt_response = await axios.get('https://restcountries.eu/rest/v2/all')
+        
+    //     console.log(tt_response.data)
+    //   }
+    //   else {
+    //     // tt_response = await axios.get(ttStockPriceUrl + ins.symbol)
+    //     tt_response = await axios.get('https://restcountries.eu/rest/v2/all')
+    //     console.log(tt_response.data)
+    //   }
+    // })
+    
   })
 
   return watchlists
