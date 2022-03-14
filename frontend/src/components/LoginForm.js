@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const LoginForm = ({ startLogin }) => {
+const LoginForm = ({ startLogin, showLoginForm, setShowLoginForm }) => {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
 
@@ -19,20 +19,45 @@ const LoginForm = ({ startLogin }) => {
   }
 
   return (
-    <div>
-      <h3>login</h3>
-      <form onSubmit={handleLogin} id='login-form'>
-        <div>
-          username: <input value={username} onChange={event => setUsername(event.target.value)} type='text' id='username' required/>
+    <div className='form-container'>
+      <div className='form-box'>
+
+        <div className='header-form'>
+          <h4 className='text-primary text-center'>
+            <i className='fa fa-user-circle' style={{fontSize:'110px'}}></i>
+          </h4>
+          <div className='image'></div>
         </div>
 
-        <div>
-          password: <input value={password} onChange={event => setPassword(event.target.value)} type='password' id='password' required/>
-        </div>
+        <div className='body-form'>
+          <form onSubmit={handleLogin} id='login-form'>
 
-        <button type='submit' id='login-submit'>login</button>
-      </form>
-    </div>
+            <div className='input-group mb-3'>
+              <div className='input-group-prepend'>
+                <span className='input-group-text'><i class='fa fa-user'></i></span>
+              </div>
+              <input type='text' className='form-control' placeholder='Username' value={username} onChange={event => setUsername(event.target.value)} id='username' required/>
+            </div>
+
+            <div className='input-group mb-3'>
+              <div className='input-group-prepend'>
+                <span className='input-group-text'><i class='fa fa-lock'></i></span>
+              </div>
+              <input type='password' className='form-control' placeholder='Password' value={password} onChange={event => setPassword(event.target.value)} id='password' required/>
+            </div>
+
+            <button type='submit' className='btn btn-success btn-block' id='login-submit'>LOGIN</button>
+            <button type='button' className='btn btn-primary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>SIGNUP INSTEAD</button>
+
+          </form>
+          {/* <div className="social">
+            <a href="#"><i className="fab fa-facebook"></i></a>
+            <a href="#"><i className="fab fa-twitter-square"></i></a>
+            <a href="#"><i className="fab fa-google"></i></a>
+          </div> */}
+        </div>
+      </div>
+    </div>   
   )
 }
 

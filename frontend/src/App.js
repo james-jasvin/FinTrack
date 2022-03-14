@@ -198,13 +198,19 @@ const App = () => {
 
   return (
     <div>
-      <h2> fintrack </h2>
+      <div className='text-center page-header p-2'>
+          <h2>
+            FinTrack {' '}
+            <i class="fa fa-cog fa-spin" aria-hidden="true"></i> {' '}
+          </h2>
+          <h5>Share investment watchlists easily!</h5>
+      </div>
+      
       <Notification notification={notification} type={notificationType} />
       <LoginMessage user={user} setUser={setUser}/>
       
-      { user === null && showLoginForm && <LoginForm startLogin={handleLogin}/> }
-      { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin}/> }
-      { user === null && <button onClick={() => setShowLoginForm(!showLoginForm)}>{showLoginForm? 'signup instead': 'login instead'}</button> }
+      { user === null && showLoginForm && <LoginForm startLogin={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
+      { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
 
       {
         user !== null && 

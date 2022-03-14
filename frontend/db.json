@@ -81,7 +81,7 @@
       "name": "YAWL",
       "isMF": false,
       "user": "61f0418cfe24a23454d47500",
-      "id": "qlSNaBN"
+      "id": "J9QmlNd"
     }
   ],
   "watchlistInstruments": [
@@ -138,24 +138,6 @@
       "instrumentId": "7",
       "watchlistId": "2",
       "id": "Y3CK3W5"
-    },
-    {
-      "symbol": "M_TADL",
-      "name": "Tata Digital India Fund - Growth",
-      "isMF": true,
-      "url": "https://www.tickertape.in/mutualfunds/tata-digital-india-fund-M_TADL?",
-      "instrumentId": "6",
-      "watchlistId": "S8nNrud",
-      "id": "H73HsPM"
-    },
-    {
-      "symbol": "LT",
-      "name": "Larsen & Toubro Ltd",
-      "isMF": false,
-      "url": "https://www.tickertape.in/stocks/larsen-and-toubro-LART?",
-      "instrumentId": "5",
-      "watchlistId": "qlSNaBN",
-      "id": "f40TFC_"
     }
   ]
 }
