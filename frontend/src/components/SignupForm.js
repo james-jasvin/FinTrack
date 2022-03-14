@@ -25,7 +25,7 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
       <div className='form-box'>
         <div className='header-form'>
           <h4 className='text-primary text-center'>
-            <i className='fa fa-user-circle' style={{fontSize:'110px'}}></i>
+            <i className='fa fa-user-circle' style={{fontSize:'110px', color: 'lightblue'}}></i>
           </h4>
           <div className='image'></div>
         </div>
@@ -54,8 +54,8 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
               <input type='text' className='form-control' placeholder='Name' value={name} onChange={event => setName(event.target.value)} id='signup-name' required/>
             </div>
 
-            <button type='submit' className='btn btn-success btn-block' id='login-submit'>SIGNUP</button>
-            <button type='button' className='btn btn-primary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>LOGIN INSTEAD</button>
+            <button type='submit' className='btn btn-primary btn-block' id='login-submit'>SIGNUP</button>
+            <button type='button' className='btn btn-secondary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>LOGIN INSTEAD</button>
 
           </form>
           {/* <div className="social">

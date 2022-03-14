@@ -198,11 +198,12 @@ const App = () => {
 
   return (
     <div>
-      <div className='text-center page-header p-2'>
-          <h2>
-            FinTrack {' '}
+      <div className='text-center page-header p-2 mb-2 regular-shadow regular-text-shadow'>
+          <div className="display-4 font-weight-bold">
+            F<small>IN</small>T<small>RACK</small> {' '}
             <i class="fa fa-cog fa-spin" aria-hidden="true"></i> {' '}
-          </h2>
+            {/* <small>Share investment watchlists easily!</small> */}
+          </div>
           <h5>Share investment watchlists easily!</h5>
       </div>
       

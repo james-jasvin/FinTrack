@@ -1,16 +1,24 @@
 body, html{
   /* background:linear-gradient(to left, green, white); */
-  background: white;
+  background: rgb(56, 53, 53);
+  background-image: url(assets/background2.jpeg);
+  background-repeat: no-repeat;
+  /*Ensures backgground covers entire element by maintaining proportions*/
+  background-attachment: fixed;
+  /*Ensures background covers full element even without maintaining proportions which is what we want*/
+  background-size: 100% 100%;
   margin:0;
   padding:0;
-  box-sizing:border-box;
-  color:black;
+  box-sizing: border-box;
+  color:white;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
 .page-header{
-  font-family: 'Montserrat', sans-serif;
-  background: lightgreen;
+  opacity: 0.8;
+  font-family: 'Raleway', sans-serif;
+  background: rgb(25, 26, 27);
+  color: lightgreen;
 }
 
 .form-container{
@@ -23,12 +31,13 @@ body, html{
 .form-box{
   width:350px;
   height:450px;
-  background-color:black;
+  background-color:#2c457c;
+  background-image:linear-gradient(90deg, #182c3b, #223a6e);
   padding:20px;
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
-  opacity:0.5;
+  opacity:0.95;
   border-radius:2%;
 }
 
@@ -61,4 +70,18 @@ code {
 
 .error {
   background: rgb(230, 69, 69);
+}
+
+.regular-shadow {
+	-webkit-box-shadow: -1px 5px 5px 0px #111;
+	box-shadow: -1px 5px 5px 0px #111;
+}
+
+.regular-text-shadow {
+	text-shadow: 1px 1px 0 rgb(93, 95, 97);
+}
+
+.no-border {
+  border: 0;
+  box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
 }

@@ -24,7 +24,7 @@ const LoginForm = ({ startLogin, showLoginForm, setShowLoginForm }) => {
 
         <div className='header-form'>
           <h4 className='text-primary text-center'>
-            <i className='fa fa-user-circle' style={{fontSize:'110px'}}></i>
+            <i className='fa fa-user-circle' style={{fontSize:'110px', color: 'lightblue'}}></i>
           </h4>
           <div className='image'></div>
         </div>
@@ -46,8 +46,8 @@ const LoginForm = ({ startLogin, showLoginForm, setShowLoginForm }) => {
               <input type='password' className='form-control' placeholder='Password' value={password} onChange={event => setPassword(event.target.value)} id='password' required/>
             </div>
 
-            <button type='submit' className='btn btn-success btn-block' id='login-submit'>LOGIN</button>
-            <button type='button' className='btn btn-primary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>SIGNUP INSTEAD</button>
+            <button type='submit' className='btn btn-primary btn-block' id='login-submit'>LOGIN</button>
+            <button type='button' className='btn btn-secondary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>SIGNUP INSTEAD</button>
 
           </form>
           {/* <div className="social">
