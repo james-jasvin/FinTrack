@@ -20,7 +20,7 @@ const LoginForm = ({ startLogin, showLoginForm, setShowLoginForm }) => {
 
   return (
     <div className='form-container'>
-      <div className='form-box'>
+      <div className='form-box regular-shadow'>
 
         <div className='header-form'>
           <h4 className='text-primary text-center'>
@@ -50,11 +50,6 @@ const LoginForm = ({ startLogin, showLoginForm, setShowLoginForm }) => {
             <button type='button' className='btn btn-secondary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>SIGNUP INSTEAD</button>
 
           </form>
-          {/* <div className="social">
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-twitter-square"></i></a>
-            <a href="#"><i className="fab fa-google"></i></a>
-          </div> */}
         </div>
       </div>
     </div>   

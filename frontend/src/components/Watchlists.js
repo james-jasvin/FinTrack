@@ -5,20 +5,9 @@ const Watchlists = ({ watchlists, removeWatchlist, removeWatchlistInstrument }) 
   if (watchlists === [])
     return null
 
-  // const blogsCopy = [...blogs]
-
-  // blogsCopy
-  //   .sort((blogA, blogB) => {
-  //     if (blogB.likes > blogA.likes)
-  //       return 1
-  //     else
-  //       return -1
-  //   })blogFormRef
-
-  // console.log(watchlists)
-
   return (
-    <div>
+    <div className='bg-dark m-5'>
+      <h3>Your Watchlists</h3>
       { watchlists.map(w => <Watchlist watchlist={w} key={w.id} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} /> )}
     </div>
   )

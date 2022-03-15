@@ -11,7 +11,7 @@ const NavBar = ({ user, setUser }) => {
     return null
 
   return (
-    <div className='regular-shadow mb-2'>
+    <div className='regular-shadow mb-1'>
       <nav className="navbar navbar-expand-lg navbar-dark" id="menu">
       <button className="p-0 navbar-brand btn btn-link border border-light p-2">Welcome, {user.name}</button>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

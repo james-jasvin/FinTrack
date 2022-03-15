@@ -1,4 +1,8 @@
 // TODO: 
+// Style "Your Watchlists" section
+// Style Search section
+// Add footer and fancy stuff like that
+
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
 // Think of possibilities where elements can be deleted at backend but still appear at frontend, not added at frontend but already added at backend
 
@@ -15,8 +19,6 @@ import watchlistService from './services/watchlists'
 import loginService from './services/login'
 
 import Notification from './components/Notification'
-import LoginMessage from './components/LoginMessage'
-import Toggleable from './components/Toggleable'
 
 import Watchlists from './components/Watchlists'
 import Watchlist from './components/Watchlist'
@@ -27,7 +29,7 @@ import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 
 import { 
-  Switch, Route, Link, useRouteMatch
+  Switch, Route, useRouteMatch
 } from 'react-router-dom'
 import NavBar from './components/NavBar'
 
@@ -93,7 +95,6 @@ const App = () => {
 
   const createWatchlist = async (watchlistObject) => {
     try {
-      watchlistFormRef.current.toggleVisibility()
       const createdWatchlist = await watchlistService.createWatchlist(watchlistObject)
 
       // Add empty list of instruments to the watchlist because it is not stored at the backend but is required at the frontend
@@ -195,15 +196,13 @@ const App = () => {
 
   return (
     <div>
-      <div className='text-center page-header p-2 regular-text-shadow'>
+      <div className='text-center page-header p-2 regular-text-shadow regular-shadow'>
           <div className='display-4 font-weight-bold'>
             F<small>IN</small>T<small>RACK</small> {' '}
             <i className='fa fa-cog fa-spin' aria-hidden='true'></i> {' '}
           </div>
           <h5>Share investment watchlists easily!</h5>
       </div>
-      
-      <Notification notification={notification} type={notificationType} />
       
       { user === null && showLoginForm && <LoginForm startLogin={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
       { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
@@ -212,6 +211,8 @@ const App = () => {
         user !== null && 
         <NavBar user={user} setUser={setUser}/>
       }
+
+      <Notification notification={notification} type={notificationType} />
 
       {
         user !== null &&
@@ -225,10 +226,10 @@ const App = () => {
           </Route>
 
           <Route path="/">
-            <Toggleable buttonLabel={'create a watchlist'} ref={watchlistFormRef}>
+            {/* <Toggleable buttonLabel={'Click Here!'} ref={watchlistFormRef}> */}
               <WatchlistForm createWatchlist={createWatchlist} />
-            </Toggleable>
-
+            {/* </Toggleable> */}
+            
             <Watchlists watchlists={watchlists} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} />
           </Route>
 

@@ -19,18 +19,20 @@ const WatchlistForm = ({ createWatchlist }) => {
   }
 
   return (
-    <div>
-      <h3>create a new watchlist</h3>
+    <div className='bg-dark p-2 m-5 rounded regular-shadow' id='watchlist-form'>
+      <h3>Create a New Watchlist</h3>
       <form onSubmit={addWatchlist} id='watchlist-form'>
-        <div>
-          watchlist name: <input value={name} onChange={event => setName(event.target.value)} type='text' id='watchlist-name' required/>
+        <div className='form-group'>
+          <label>Watchlist Name:</label>
+          <input className='form-control' value={name} onChange={event => setName(event.target.value)} type='text' id='watchlist-name' required/>
         </div>
 
-        <div>
-          is MF watchlist?: <input checked={isMF} onChange={event => setIsMF(!isMF)} type='checkbox' id='watchlist-is-mf'/>
+        <div className='form-check'>
+          <input className='form-check-input' checked={isMF} onChange={event => setIsMF(!isMF)} type='checkbox' id='watchlist-is-mf'/>
+          <label>Is MF Watchlist?</label>
         </div>
 
-        <button type='submit' id='watchlist-submit'>submit</button>
+        <button className='btn btn-success' type='submit' id='watchlist-submit'>Submit</button>
       </form>
     </div>
   )

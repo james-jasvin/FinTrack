@@ -22,7 +22,7 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
 
   return (
     <div className='form-container'>
-      <div className='form-box'>
+      <div className='form-box regular-shadow'>
         <div className='header-form'>
           <h4 className='text-primary text-center'>
             <i className='fa fa-user-circle' style={{fontSize:'110px', color: 'lightblue'}}></i>
