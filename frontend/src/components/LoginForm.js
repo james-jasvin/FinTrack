@@ -34,14 +34,14 @@ const LoginForm = ({ startLogin, showLoginForm, setShowLoginForm }) => {
 
             <div className='input-group mb-3'>
               <div className='input-group-prepend'>
-                <span className='input-group-text'><i class='fa fa-user'></i></span>
+                <span className='input-group-text'><i className='fa fa-user'></i></span>
               </div>
               <input type='text' className='form-control' placeholder='Username' value={username} onChange={event => setUsername(event.target.value)} id='username' required/>
             </div>
 
             <div className='input-group mb-3'>
               <div className='input-group-prepend'>
-                <span className='input-group-text'><i class='fa fa-lock'></i></span>
+                <span className='input-group-text'><i className='fa fa-lock'></i></span>
               </div>
               <input type='password' className='form-control' placeholder='Password' value={password} onChange={event => setPassword(event.target.value)} id='password' required/>
             </div>

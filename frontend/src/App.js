@@ -29,6 +29,7 @@ import SignupForm from './components/SignupForm'
 import { 
   Switch, Route, Link, useRouteMatch
 } from 'react-router-dom'
+import NavBar from './components/NavBar'
 
 
 const App = () => {
@@ -51,10 +52,6 @@ const App = () => {
   // These states are used to control the notifications that show up at the top of the screen for events like login, signup, watchlist creation, etc.
   const [ notification, setNotification ] = useState(null)
   const [ notificationType, setNotificationType ] = useState(null)
-
-  const padding = {
-    padding: 5
-  }
 
   // A useRef hook to attach to Watchlist Form component, so that we can toggle the visibility of the form on and off
   const watchlistFormRef = useRef()
@@ -198,27 +195,22 @@ const App = () => {
 
   return (
     <div>
-      <div className='text-center page-header p-2 mb-2 regular-shadow regular-text-shadow'>
-          <div className="display-4 font-weight-bold">
+      <div className='text-center page-header p-2 regular-text-shadow'>
+          <div className='display-4 font-weight-bold'>
             F<small>IN</small>T<small>RACK</small> {' '}
-            <i class="fa fa-cog fa-spin" aria-hidden="true"></i> {' '}
-            {/* <small>Share investment watchlists easily!</small> */}
+            <i className='fa fa-cog fa-spin' aria-hidden='true'></i> {' '}
           </div>
           <h5>Share investment watchlists easily!</h5>
       </div>
       
       <Notification notification={notification} type={notificationType} />
-      <LoginMessage user={user} setUser={setUser}/>
       
       { user === null && showLoginForm && <LoginForm startLogin={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
       { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
 
       {
         user !== null && 
-        <div>
-          <Link style={padding} to="/">home</Link>
-          <Link style={padding} to="/search">search</Link>
-        </div>
+        <NavBar user={user} setUser={setUser}/>
       }
 
       {

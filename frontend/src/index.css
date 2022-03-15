@@ -45,6 +45,11 @@ body, html{
   margin-bottom:15px;
 }
 
+#menu {
+  background: rgb(25, 26, 27);
+  opacity: 0.8;
+}
+
 form > button{
   margin-top:40px;
   margin-bottom:10px;
