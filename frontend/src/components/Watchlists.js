@@ -6,8 +6,8 @@ const Watchlists = ({ watchlists, removeWatchlist, removeWatchlistInstrument }) 
     return null
 
   return (
-    <div className='bg-dark m-5 p-2 rounded regular-shadow' id="watchlists">
-      <h3>Your Watchlists</h3>
+    <div className='m-5 p-2 rounded regular-shadow' id="watchlists">
+      <h2 className='ml-2'>Your Watchlists</h2>
       { watchlists.map(w => <Watchlist watchlist={w} key={w.id} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} /> )}
     </div>
   )

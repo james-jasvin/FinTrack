@@ -19,7 +19,7 @@ const WatchlistForm = ({ createWatchlist }) => {
   }
 
   return (
-    <div className='bg-dark p-2 m-5 rounded regular-shadow' id='watchlist-form'>
+    <div className='p-2 m-5 rounded regular-shadow' id='watchlist-form'>
       <h3>Create a New Watchlist</h3>
       <form onSubmit={addWatchlist} id='watchlist-form'>
         <div className='form-group'>

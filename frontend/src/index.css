@@ -51,15 +51,21 @@ body, html{
 }
 
 #watchlist-form {
+  background: #0b1b3d;
   max-width: 40vw;
 }
 
 #watchlists {
+  background: linear-gradient(90deg, #200f8f, #130b44);
   max-width: 60vw;
 }
 
 .watchlist {
-  background: linear-gradient(90deg, #0b131a, #0b1b3d);
+  background: linear-gradient(90deg, #0b1b3d, #0b131a);
+}
+
+.watchlist-content {
+  background: linear-gradient(90deg, rgb(25, 26, 27), #0b131a);
 }
 
 .copiedLinkSuccess {
@@ -69,6 +75,14 @@ body, html{
 form > button{
   margin-top:40px;
   margin-bottom:10px;
+}
+
+.tickertape-icon {
+  background: url('assets/tickertape-fi-cropped.jpg');
+  background-size: contain;
+  height: 40px;
+  width: 40px;
+  display: block;
 }
 
 code {

@@ -47,7 +47,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
         
         <div>
           <nav className="navbar navbar-dark navbar-expand-sm">
-            <button className="p-0 navbar-brand btn btn-link border h5 border-dark p-2">{watchlist.name} - <small>{watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}</small></button>
+            <button className="navbar-brand btn btn-link border border-dark p-2"><h4>{watchlist.name} - <small>{watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}</small></h4></button>
 
             <div>
               <ul className="navbar-nav mr-auto">
@@ -55,8 +55,8 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                   // Only show toggling of watchlist feature when not in single watchlist view mode
                   removeWatchlist?
                   <li className="nav-item active">
-                    <button onClick={toggleVisibility} className='visibility-button'>
-                      {visibility? <i class="fa-solid fa-angle-up"></i>: <i class="fa-solid fa-angle-down"></i>}
+                    <button onClick={toggleVisibility} className='visibility-button btn btn-link'>
+                      {visibility? <i className="fa-solid fa-angle-up"></i>: <i className="fa-solid fa-angle-down"></i>}
                     </button>
                   </li>
                   : ''
@@ -65,8 +65,8 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                   <button onClick={() => {
                     navigator.clipboard.writeText(watchlistUrl)
                     showCopiedToClipboardNotification()
-                  }} className='share-watchlist'>
-                    <i class="fa-solid fa-share"></i>
+                  }} className='share-watchlist btn btn-link'>
+                    <i className="fa-solid fa-share-nodes"></i>
                   </button>
                 </li>
 
@@ -75,17 +75,13 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                   // This is checked by checking removeWatchlist parameter, it is non-null if owner is viewing and null otherwise
                   removeWatchlist?
                   <li className='nav-item'>
-                    <button onClick={deleteWatchlist} className='delete-watchlist remove-button'>
-                      <i class="fa-solid fa-trash-can"></i>
+                    <button onClick={deleteWatchlist} className='delete-watchlist remove-button btn btn-link'>
+                      <i className="fa-solid fa-trash-can"></i>
                     </button>
                   </li>
                   : '' 
                 }
-
-
               </ul>
-              
-              {/* <div className='inline my-2 my-lg-0'><button className='btn btn-primary' onClick={logout}>Logout</button></div> */}
             </div>
           </nav>
         </div>
@@ -100,7 +96,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
           // If in normal watchlist view mode => removeWatchlist !== null, then visibility should be true for showing WatchlistInstruments
           // The summary of these two conditions is, (removeWatchlist === null || visibility)
           (removeWatchlist === null || visibility) &&
-                <div>
+                <div className='watchlist-content rounded p-2 ml-2 regular-shadow'>
                   {
                     watchlist.instruments.length > 0?
                       watchlist.instruments.map(
@@ -112,7 +108,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                           removeWatchlistInstrument={removeWatchlistInstrument}
                         />
                       )
-                      : 'No instruments added to this watchlist yet'
+                      : <span className='pl-4'>No instruments added to this watchlist yet</span>
                   }
                 </div>
         }
