@@ -9,7 +9,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
 
   // When share watchlist button is clicked, show this text for 2 seconds
   const showCopiedToClipboardNotification = () => {
-    setCopiedLinkSuccess('copied shareable watchlist url to clipboard!')
+    setCopiedLinkSuccess('Copied Shareable Watchlist URL to the Clipboard!')
 
     setTimeout(() => {
       setCopiedLinkSuccess('')
@@ -30,8 +30,6 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
   const watchlistUrl = `http://localhost:3000/watchlists/${watchlist.id}`
 
   const watchlistStyle = {
-    border: 'solid',
-    borderWidth: 1,
     marginBottom: 5,
     paddingTop: 5,
     paddingBottom: 5
@@ -44,26 +42,57 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
   }
 
   return (
-    <div className='watchlist' style={watchlistStyle}>
+    <div className='watchlist regular-shadow p-2 m-2 rounded' style={watchlistStyle}>
       <div className='watchlist-header'>
         
-        {watchlist.name} - {watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}
-        {
-          // Only show toggling of watchlist feature when not in single watchlist view mode
-          removeWatchlist?
-          <button onClick={toggleVisibility} className='visibility-button'>
-            {visibility? 'hide': 'view'}
-          </button>
-          : ''
-        }
-        <button onClick={() => {
-          navigator.clipboard.writeText(watchlistUrl)
-          showCopiedToClipboardNotification()
-        }} className='share-watchlist'>share watchlist</button>
+        <div>
+          <nav className="navbar navbar-dark navbar-expand-sm">
+            <button className="p-0 navbar-brand btn btn-link border h5 border-dark p-2">{watchlist.name} - <small>{watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}</small></button>
+
+            <div>
+              <ul className="navbar-nav mr-auto">
+                {
+                  // Only show toggling of watchlist feature when not in single watchlist view mode
+                  removeWatchlist?
+                  <li className="nav-item active">
+                    <button onClick={toggleVisibility} className='visibility-button'>
+                      {visibility? <i class="fa-solid fa-angle-up"></i>: <i class="fa-solid fa-angle-down"></i>}
+                    </button>
+                  </li>
+                  : ''
+                }
+                <li className='nav-item active'>
+                  <button onClick={() => {
+                    navigator.clipboard.writeText(watchlistUrl)
+                    showCopiedToClipboardNotification()
+                  }} className='share-watchlist'>
+                    <i class="fa-solid fa-share"></i>
+                  </button>
+                </li>
+
+                {
+                  // Only show the option to delete watchlist, if owner of watchlist is viewing the watchlist and not some other user
+                  // This is checked by checking removeWatchlist parameter, it is non-null if owner is viewing and null otherwise
+                  removeWatchlist?
+                  <li className='nav-item'>
+                    <button onClick={deleteWatchlist} className='delete-watchlist remove-button'>
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </li>
+                  : '' 
+                }
+
+
+              </ul>
+              
+              {/* <div className='inline my-2 my-lg-0'><button className='btn btn-primary' onClick={logout}>Logout</button></div> */}
+            </div>
+          </nav>
+        </div>
 
         {/* Replace the inline style by something more pleasant later on */}
-        <div style={{'color':'green'}}>{ copiedLinkSuccess }</div>
-        
+        <div className='ml-4 mb-4 h5 copiedLinkSuccess'>{ copiedLinkSuccess }</div>
+
       </div>
       <div className='watchlist-details'>
         {
@@ -87,16 +116,6 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                   }
                 </div>
         }
-        {
-          // Only show the option to delete watchlist, if owner of watchlist is viewing the watchlist and not some other user
-          // This is checked by checking removeWatchlist parameter, it is non-null if owner is viewing and null otherwise
-          removeWatchlist?
-          <div>
-            <button onClick={deleteWatchlist} className='delete-watchlist remove-button'>delete</button>
-          </div>
-          : '' 
-        }
-        
       </div>
     </div>
   )

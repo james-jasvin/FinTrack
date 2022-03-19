@@ -51,7 +51,19 @@ body, html{
 }
 
 #watchlist-form {
-  max-width: 60vh;
+  max-width: 40vw;
+}
+
+#watchlists {
+  max-width: 60vw;
+}
+
+.watchlist {
+  background: linear-gradient(90deg, #0b131a, #0b1b3d);
+}
+
+.copiedLinkSuccess {
+  color: rgb(105, 221, 215);
 }
 
 form > button{
