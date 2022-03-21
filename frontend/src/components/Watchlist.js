@@ -47,7 +47,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
         
         <div>
           <nav className="navbar navbar-dark navbar-expand-sm">
-            <button className="navbar-brand btn btn-link border border-dark p-2"><h4>{watchlist.name} - <small>{watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}</small></h4></button>
+            <button className="navbar-brand btn btn-link border border-dark p-2"><h4>{watchlist.name}<br/><small>{watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}</small></h4></button>
 
             <div>
               <ul className="navbar-nav mr-auto">
@@ -96,7 +96,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
           // If in normal watchlist view mode => removeWatchlist !== null, then visibility should be true for showing WatchlistInstruments
           // The summary of these two conditions is, (removeWatchlist === null || visibility)
           (removeWatchlist === null || visibility) &&
-                <div className='watchlist-content rounded p-2 ml-2 regular-shadow'>
+                <div className='watchlist-content rounded p-2 regular-shadow'>
                   {
                     watchlist.instruments.length > 0?
                       watchlist.instruments.map(

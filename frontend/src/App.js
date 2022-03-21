@@ -1,5 +1,6 @@
 // TODO: 
 // Add footer and fancy stuff like that
+// Can reactjs-popup to replace the alert window dialog boxes
 // Can add, react-alerts to replace the basic notification system that we have going on right now, but its a bit of a work to integrate
 
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
@@ -234,6 +235,10 @@ const App = () => {
 
         </Switch>  
       }
+
+      <footer className='footer rounded text-center p-2'>
+        <span>Returd Gang 2022-23 &copy;</span>  
+      </footer>
 
     </div>
   )

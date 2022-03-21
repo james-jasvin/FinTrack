@@ -13,7 +13,7 @@ const WatchlistInstrument = ({ watchlist, instrument, removeWatchlistInstrument 
       <button className="pr-3 btn text-light"><h5>{instrument.symbol} - {instrument.name}</h5></button>
 
       <div>
-        <ul className="navbar-nav mr-auto">
+        <ul className="navbar-nav">
           
           <li className="nav-item active">
             <a href={instrument.url} target='_blank' rel='noreferrer'><i className='tickertape-icon'></i></a>

@@ -15,7 +15,7 @@ body, html{
 }
 
 .page-header{
-  opacity: 0.8;
+  opacity: 0.85;
   font-family: 'Raleway', sans-serif;
   background: rgb(25, 26, 27);
   color: lightgreen;
@@ -47,17 +47,17 @@ body, html{
 
 #menu {
   background: rgb(25, 26, 27);
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 #watchlist-form {
   background: #0b1b3d;
-  max-width: 40vw;
+  max-width: 60vw;
 }
 
 #watchlists {
   background: linear-gradient(90deg, #200f8f, #130b44);
-  max-width: 60vw;
+  /* max-width: 90vw; */
 }
 
 .watchlist {
@@ -131,4 +131,14 @@ code {
 .no-border {
   border: 0;
   box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+}
+
+footer {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+  opacity: 0.95;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: black;
 }
