@@ -24,7 +24,7 @@ const WatchlistForm = ({ createWatchlist }) => {
       <form onSubmit={addWatchlist} id='watchlist-form'>
         <div className='form-group'>
           <label>Watchlist Name:</label>
-          <input className='form-control' value={name} onChange={event => setName(event.target.value)} type='text' id='watchlist-name' required/>
+          <input className='form-control' value={name} onChange={event => setName(event.target.value)} placeholder='Enter watchlist name' type='text' id='watchlist-name' required/>
         </div>
 
         <div className='form-check'>

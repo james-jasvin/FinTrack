@@ -85,6 +85,19 @@ form > button{
   display: block;
 }
 
+#search-bar {
+  max-width: 80vw;
+}
+
+#search-results {
+  max-width: 80vw;
+  background: linear-gradient(90deg, #200f8f, #130b44);
+}
+
+#search-results-header {
+  background: rgb(37, 36, 36);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -96,7 +109,6 @@ code {
   border-style: solid;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
 }
 
 .success {

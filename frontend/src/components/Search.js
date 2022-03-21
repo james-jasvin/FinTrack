@@ -21,16 +21,30 @@ const Search = ({ watchlists, instruments, addToWatchlist }) => {
   const mfWatchlists = watchlists.filter(w => w.isMF === true)
 
   return (
-    <div>
-      <input type="text" placeholder="Search for stocks or MFs" value={ filterText } onChange={ event => setFilterText(event.target.value) }/>
-      <h3>search results: </h3> 
-      { filteredInstruments.map( ins =>
-      <Instrument
-        key={ins.id}
-        watchlists={ins.isMF? mfWatchlists: stockWatchlists}
-        instrument={ins}
-        addToWatchlist={addToWatchlist}/>) 
-      }
+    <div className="m-5">
+      <div className='input-group regular-shadow rounded' id='search-bar'>
+        <div className='input-group-prepend'>
+          <span className='input-group-text bg-dark text-light border-dark'><i class="fa-solid fa-magnifying-glass"></i></span>
+        </div>
+        <input type="text" className='form-control form-control-lg' placeholder="Search for Stocks or MFs" value={ filterText } onChange={ event => setFilterText(event.target.value) }/>
+      </div>
+
+      <div className="rounded mt-5 regular-shadow" id="search-results">
+        <div className="regular-shadow p-2 pl-3 rounded" id="search-results-header"><h3>Search Results</h3> </div>
+        <div className="pb-4 pt-2">
+          { filteredInstruments.length?
+            filteredInstruments.map( ins =>
+            <Instrument
+              key={ins.id}
+              watchlists={ins.isMF? mfWatchlists: stockWatchlists}
+              instrument={ins}
+              addToWatchlist={addToWatchlist}/>) 
+            : <h5 className="p-3">Enter instrument name or symbol for searching</h5>
+          }
+        </div>
+        
+      </div>
+      
     </div>
   )
 }

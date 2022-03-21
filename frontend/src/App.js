@@ -1,7 +1,6 @@
 // TODO: 
-// Style "Your Watchlists" section
-// Style Search section
 // Add footer and fancy stuff like that
+// Can add, react-alerts to replace the basic notification system that we have going on right now, but its a bit of a work to integrate
 
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
 // Think of possibilities where elements can be deleted at backend but still appear at frontend, not added at frontend but already added at backend
@@ -73,7 +72,7 @@ const App = () => {
     setTimeout(() => {
       setNotificationType(null)
       setNotification(null)
-    }, 5000)
+    }, 10000)
   }
 
   const handleLogin = async (credentials, isLogin) => {
@@ -84,9 +83,9 @@ const App = () => {
       window.localStorage.setItem('loggedInUser', JSON.stringify(userObject))
 
       if (isLogin)
-        notificationHandler(`logged in successfully as ${userObject.name}`, 'success')
+        notificationHandler(`Logged in successfully as ${userObject.name}`, 'success')
       else
-        notificationHandler(`signed up successfully as ${userObject.name}`, 'success')
+        notificationHandler(`Signed up successfully as ${userObject.name}`, 'success')
     }
     catch (exception) {
       notificationHandler(exception.response.data.error, 'error')
@@ -102,7 +101,7 @@ const App = () => {
 
       setWatchlists(watchlists.concat(createdWatchlist))
 
-      notificationHandler(`a new ${createdWatchlist.isMF? 'MF':'stocks'} watchlist "${createdWatchlist.name}" has been successfully created`, 'success')
+      notificationHandler(`A new ${createdWatchlist.isMF? 'MF':'Stocks'} watchlist "${createdWatchlist.name}" has been successfully created`, 'success')
     }
     catch (exception) {
       notificationHandler(exception.response.data.error, 'error')
@@ -204,15 +203,15 @@ const App = () => {
           <h5>Share investment watchlists easily!</h5>
       </div>
       
+      <Notification notification={notification} type={notificationType} />
+
       { user === null && showLoginForm && <LoginForm startLogin={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
       { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
 
       {
         user !== null && 
         <NavBar user={user} setUser={setUser}/>
-      }
-
-      <Notification notification={notification} type={notificationType} />
+      } 
 
       {
         user !== null &&

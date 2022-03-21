@@ -43,20 +43,29 @@ const Instrument = ({ watchlists, instrument, addToWatchlist }) => {
   // When user clicks an entry, the onChange of the <select> is triggered which will call createWatchlistInstrument
   // If user clicks default option, then nothing should happen which is why check for watchlistIdx == -1 in the event handler function
   return (
-    <div className='instrument'>
-      {instrument.symbol} - {instrument.name} <br/>
-      Add price and other info here <br/>
+    <nav className="navbar navbar-expand-sm instrument mb-2 regular-shadow">
+      <button className="btn text-light mr-auto"><h5>{instrument.symbol} - {instrument.name}</h5></button>
 
-      <select value={selectedWatchlist} onChange={createWatchlistInstrument}>
-        <option value={-1}>Select a Watchlist</option>
-        {
-          filteredWatchlists.map((w, idx) => 
-            <option key={w.id} value={idx}>{w.name}</option>
-          )
-        }
-      </select>
+      <div>
+        <ul className="navbar-nav">
 
-    </div>
+          <li className="nav-item active">
+            <a href={instrument.url} target='_blank' rel='noreferrer'><i className='tickertape-icon'></i></a>
+          </li>
+
+          <li className="nav-item active">
+            <select className='form-select p-2 regular-shadow rounded-lg' value={selectedWatchlist} onChange={createWatchlistInstrument}>
+              <option value={-1}>Add to Watchlist</option>
+              {
+                filteredWatchlists.map((w, idx) => 
+                  <option key={w.id} value={idx}>{w.name}</option>
+                )
+              }
+            </select>
+          </li>
+        </ul>
+      </div>
+    </nav>
   )
 }
 
