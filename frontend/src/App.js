@@ -1,6 +1,10 @@
 // TODO: 
+
+// Can .env file contain actual IP address instead of localhost, perhaps can use Ansible playbook for this
+// Get the IP Address from the inventory file or something
+
 // Add footer and fancy stuff like that
-// Can reactjs-popup to replace the alert window dialog boxes
+// Can use reactjs-popup to replace the alert window dialog boxes
 // Can add, react-alerts to replace the basic notification system that we have going on right now, but its a bit of a work to integrate
 
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
@@ -11,7 +15,6 @@
 // Topic of discussion, should users be able to view shared watchlists without logging in to an account?
 // If yes, then GET watchlistInstruments and GET watchlists routes have to function without authentication
 // If no, then current implementation works as it should
-
 
 import React, { useState, useEffect, useRef } from 'react'
 

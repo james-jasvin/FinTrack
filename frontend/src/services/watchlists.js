@@ -3,13 +3,18 @@
 // Also add token authentication to the above route
 
 import axios from 'axios'
- 
-// const watchlistUrl = '/api/watchlists/'
-const watchlistUrl = 'http://localhost:3001/watchlists'
-// const instrumentUrl = '/api/instruments/'
-const instrumentUrl = 'http://localhost:3001/instruments'
-// const instrumentUrl = '/api/watchlistInstruments/'
-const watchlistInstrumentUrl = 'http://localhost:3001/watchlistInstruments'
+const config = require('../config')
+
+// Uncomment the /api/ URLs and remove the non-/api/ URLs once the backend is ready
+
+// const watchlistUrl = `${config.BACKEND_URL}/api/watchlists`
+const watchlistUrl = `${config.BACKEND_URL}/watchlists`
+
+// const instrumentUrl = `${config.BACKEND_URL}/api/instruments`
+const instrumentUrl = `${config.BACKEND_URL}/instruments`
+
+// const watchlistInstrumentUrl = `${config.BACKEND_URL}/api/watchlistInstruments`
+const watchlistInstrumentUrl = `${config.BACKEND_URL}/watchlistInstruments`
 
 // const ttStockPriceUrl = 'https://quotes-api.tickertape.in/quotes?sids='
 // const ttMFPriceUrl = 'https://api.tickertape.in/mutualfunds/'  // Example of complete URL: https://api.tickertape.in/mutualfunds/M_TAIM/info
@@ -100,8 +105,8 @@ const createWatchlist = async (watchlist) => {
   }
 
   // TODO: This is temporary solution for json-server compatibility
-  // Once Express backend is configured, just remove this code snippet and the method should still work fine because backend will user the token
-  // to verify authenticity instead of user id which is required for json-server
+  // Once Express backend is configured, just remove this code snippet and the method should still work fine
+  // because backend will use the token to verify authenticity instead of user id which is required for json-server
   const user = JSON.parse(window.localStorage.getItem('loggedInUser'))
   const tempWatchlist = {
     ...watchlist,

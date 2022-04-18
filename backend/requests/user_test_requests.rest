@@ -24,3 +24,6 @@ content-type: application/json
 {
     "username": "User", "password": "123456"
 }
+
+###
+GET http://localhost:3001/watchlists/3
