@@ -39,7 +39,7 @@ const Search = ({ watchlists, instruments, addToWatchlist }) => {
               watchlists={ins.isMF? mfWatchlists: stockWatchlists}
               instrument={ins}
               addToWatchlist={addToWatchlist}/>) 
-            : <h5 className="p-3">Enter instrument name or symbol for searching</h5>
+            : <h5 className="p-3">No valid instruments found</h5>
           }
         </div>
         
