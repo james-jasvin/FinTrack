@@ -1,0 +1,28 @@
+services:
+  fintrack-frontend:
+    image: jasvinjames/fintrack-frontend:latest
+    # Keep stdin_open because we don't want this container to exit immediately which it
+    # otherwise would have because there's no foreground processes
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      fintrack:
+        ipv4_address: 172.28.1.6
+
+  # TODO: UPDATE .env.development BACKEND_URL variable with this IP address once backend is ready
+
+  # fintrack-backend:
+  #   image: jasvinjames/fintrack-backend:latest
+  #   ports:
+  #     - "3001:3001"
+  #   networks:
+  #     fintrack:
+  #       ipv4_address: 172.28.1.7
+  
+networks:
+  fintrack:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.28.1.0/24
