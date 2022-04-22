@@ -27,3 +27,16 @@ content-type: application/json
 
 ###
 GET http://localhost:3001/watchlists/3
+
+###
+GET http://localhost:3001/api/instruments/
+
+###
+POST http://localhost:3001/api/watchlists/
+content-type: application/json
+
+{
+    "name": "newWatchlist", "isMF": true, "user": "61f0f9ee4e819f6d7d088344"
+}
+
+

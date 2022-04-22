@@ -1,16 +1,16 @@
 * = API route requires token authentication for request to succeed
 
-GET /api/users/ => Return all users [Can be removed later as it exposes all user details]
+DONE - GET /api/users/ => Return all users [Can be removed later as it exposes all user details]
 
-* POST /api/users/ => Create user with details given in request body
+DONE - * POST /api/users/ => Create user with details given in request body
 
-* POST /api/login/ => Verify user login credentials which are given in request body
+DONE - * POST /api/login/ => Verify user login credentials which are given in request body
 
-GET /api/instruments => Get all instruments stored in DB
+DONE RIGHT NOW - GET /api/instruments => Get all instruments stored in DB
 
 * GET /api/watchlists?user={user.id} => Return all watchlists which have given user id in the query [Use find() method in Mongoose]
 
-* POST /api/watchlists => Create watchlist with data given in request body
+* (DONE FIRST) - POST /api/watchlists => Create watchlist with data given in request body
 
 * DELETE /api/watchlists/{watchlist.id} => Delete watchlist with given id
 
