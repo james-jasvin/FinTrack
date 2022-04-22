@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from '../config'
+const config = require('../config')
 
 const loginBaseUrl = `${config.BACKEND_URL}/api/login`
 const signupBaseUrl = `${config.BACKEND_URL}/api/users`
