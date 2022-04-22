@@ -16,7 +16,9 @@ RUN npm install
 # Copy the local files to the "app" folder
 COPY . .
 
-# Expose port 3001 on the host machine to the container for listening to external connections
-EXPOSE 3001
+# Uncomment these lines once backend is ready
 
-CMD ["npm", "start"]
+# Expose port 3001 on the host machine to the container for listening to external connections
+# EXPOSE 3001
+
+# CMD ["npm", "start"]
