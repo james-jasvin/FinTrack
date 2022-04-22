@@ -61,7 +61,7 @@ const getUserWatchlistData = async (user) => {
   }
 
   // Get watchlists of given user
-  const response = await axios.get(`${watchlistUrl}?/user=${user.id}`, config)
+  const response = await axios.get(`${watchlistUrl}?user=${user.id}`, config)
   const watchlists = response.data
 
 
