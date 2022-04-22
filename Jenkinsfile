@@ -18,11 +18,11 @@ pipeline {
 				}
 			}
         
-			// stage('Build Fintrack Backend Docker Image') {
-			//	steps {
-			//     sh "docker build -t $DOCKERHUB_REGISTRY-backend:latest backend/"
-			//   }   
-			// }
+			stage('Build Fintrack Backend Docker Image') {
+				steps {
+			    sh "docker build -t $DOCKERHUB_REGISTRY-backend:latest backend/"
+			  }   
+			}
 
 			stage('Build Fintrack Frontend Docker Image') {
 				steps {
@@ -36,11 +36,11 @@ pipeline {
 				}
 			}
 
-			// stage('Push Backend Docker Image to Docker Hub') {
-			//   steps {
-			//     sh "docker push $DOCKERHUB_REGISTRY-backend:latest"
-			//   }
-			// }
+			stage('Push Backend Docker Image to Docker Hub') {
+			  steps {
+			    sh "docker push $DOCKERHUB_REGISTRY-backend:latest"
+			  }
+			}
 
 			stage('Push Frontend Docker Image to Docker Hub') {
 				steps {
@@ -51,7 +51,7 @@ pipeline {
 			stage('Removing Docker Images from Local') {
 				steps {
 					sh "docker rmi $DOCKERHUB_REGISTRY-frontend:latest"
-					// sh "docker rmi $DOCKERHUB_REGISTRY-backend:latest"
+					sh "docker rmi $DOCKERHUB_REGISTRY-backend:latest"
 				}
 			}
         
@@ -60,11 +60,11 @@ pipeline {
 				steps {
 					ansiblePlaybook becomeUser: 'null',
 					colorized: true,
-					// credentialsId: 'dockerhub-id',
 					installation: 'Ansible',
 					inventory: 'inventory',
 					playbook: 'ansible-playbook.yml',
 					sudoUser: 'null'
+					vaultCredentialsId: 'fintrack-ansible-vault-password'
 				}
 			}
     }
