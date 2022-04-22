@@ -37,6 +37,14 @@ content-type: application/json
 
 {
     "name": "newWatchlist", "isMF": true, "user": "61f0f9ee4e819f6d7d088344"
+    //"name": "DevWatchLIst", "isMF": true, "user": "62627adc938c975d9ba9576b"
+    
 }
 
 
+###
+ // GET http://localhost:3001/api/watchlists?user=61f0f9ee4e819f6d7d088344
+ GET http://localhost:3001/api/watchlists?user=62627adc938c975d9ba9576b
+
+###
+ DELETE http://localhost:3001/api/watchlists/6262dadc66def321c8aa20de

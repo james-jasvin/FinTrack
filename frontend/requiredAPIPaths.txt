@@ -8,11 +8,11 @@ DONE - * POST /api/login/ => Verify user login credentials which are given in re
 
 DONE RIGHT NOW - GET /api/instruments => Get all instruments stored in DB
 
-* GET /api/watchlists?user={user.id} => Return all watchlists which have given user id in the query [Use find() method in Mongoose]
+* (DONE SECOND) - GET /api/watchlists?user={user.id} => Return all watchlists which have given user id in the query [Use find() method in Mongoose]
 
 * (DONE FIRST) - POST /api/watchlists => Create watchlist with data given in request body
 
-* DELETE /api/watchlists/{watchlist.id} => Delete watchlist with given id
+* (DONE THIRD) - DELETE /api/watchlists/{watchlist.id} => Delete watchlist with given id
 
 * POST /api/watchlistInstruments => Create watchlist instrument with given watchlist id and instrument id in request body
 
