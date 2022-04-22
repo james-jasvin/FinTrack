@@ -8,11 +8,6 @@
         src: ./docker-compose.yml
         dest: ./
 
-    # This is added so that the Docker images of the previous builds
-    # which will now become dangling images are removed
-    - name: Prune the dangling Docker images
-      command: docker image prune --force
-
     # Pull the Docker images from Docker Hub
     - name: Pull the Docker images specifed in docker-compose
       command: docker-compose pull
@@ -21,3 +16,8 @@
     # even though the docker-compose up command has successfully executed
     - name: Run the pulled Docker images in detached mode
       command: docker-compose up -d
+
+    # This is added so that the Docker images of the previous builds
+    # which will now become dangling images are removed
+    - name: Prune the dangling Docker images
+      command: docker image prune --force
