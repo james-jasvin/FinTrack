@@ -10,12 +10,10 @@ services:
       fintrack:
         ipv4_address: 172.28.1.6
 
-  # TODO: UPDATE .env.development BACKEND_URL variable with this IP address once backend is ready
-  # UPDATE PORT 3002 TO 3001 LATER IF THIS DOESN'T WORK PROPERLY
   fintrack-backend:
     image: jasvinjames/fintrack-backend:latest
-    # ports:
-    #   - "3001:3001"
+    ports:
+      - "3001:3001"
     networks:
       fintrack:
         ipv4_address: 172.28.1.7
