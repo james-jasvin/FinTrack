@@ -19,9 +19,5 @@ COPY . .
 # Expose port 3000 on the host machine to the container for listening to external connections
 EXPOSE 3000
 
-# Exposing port 3001, temporary way to make mock backend, json-server work as a proxy
-# as defined in the package.json file
-EXPOSE 3001
-
 # Start the React applications
 CMD ["npm", "start"]
