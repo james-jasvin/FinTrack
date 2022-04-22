@@ -48,6 +48,7 @@ pipeline {
 				}
 			}
         
+			// CHECK SYNTAX OF THESE TWO SH COMMANDS
 			stage('Removing Docker Images from Local') {
 				steps {
 					sh "docker rmi $DOCKERHUB_REGISTRY-frontend:latest"
@@ -63,7 +64,7 @@ pipeline {
 					installation: 'Ansible',
 					inventory: 'inventory',
 					playbook: 'ansible-playbook.yml',
-					sudoUser: 'null'
+					sudoUser: 'null',
 					vaultCredentialsId: 'fintrack-ansible-vault-password'
 				}
 			}
