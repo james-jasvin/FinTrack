@@ -20,7 +20,7 @@ pipeline {
         
         // stage('Build Fintrack Backend Docker Image') {
 			  //   steps {
-        //     sh "docker build -t $DOCKERHUB_REGISTRY-frontend:latest backend/"
+        //     sh "docker build -t $DOCKERHUB_REGISTRY-backend:latest backend/"
 			  //   }   
 		    // }
 
@@ -51,7 +51,7 @@ pipeline {
         stage('Removing Docker Images from Local') {
             steps {
                 sh "docker rmi $DOCKERHUB_REGISTRY-frontend:latest"
-                sh "docker rmi $DOCKERHUB_REGISTRY-backend:latest"
+                // sh "docker rmi $DOCKERHUB_REGISTRY-backend:latest"
             }
         }
         
