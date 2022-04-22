@@ -13,7 +13,7 @@ pipeline {
 				steps {
 					// credentials are required because its a private repository
 					git url: 'https://github.com/james-jasvin/FinTrack.git',
-					branch: 'master',
+					branch: 'jasvin',
 					credentialsId: 'github-pat'
 				}
 			}
