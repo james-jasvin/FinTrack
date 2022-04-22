@@ -6,6 +6,7 @@ const app = express()
 
 const loginRouter = require('./controllers/login')
 const userRouter = require('./controllers/users')
+const instrumentRouter = require('./controllers/instruments')
 // const testingRouter = require('./controllers/test')
 const middleware = require('./utils/middleware')
 
@@ -53,6 +54,7 @@ app.use(middleware.tokenExtractor)
 
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/instruments', instrumentRouter)
 
 // This is how you should include your API controller
 // app.use('/api/blogs', middleware.userExtractor, blogsRouter)

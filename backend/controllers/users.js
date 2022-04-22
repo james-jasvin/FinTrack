@@ -1,3 +1,4 @@
+
 const userRouter = require('express').Router()
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
@@ -7,6 +8,7 @@ const bcrypt = require('bcrypt')
 	- populate() method fills the data for the specified field, i.e. watchlists field with its "id" and "name"
 	- It is equivalent to a join operation in SQL DBs
 */
+
 userRouter.get('/', async (request, response) => {
 	const users = await User.find({})
 	response.json(users)
