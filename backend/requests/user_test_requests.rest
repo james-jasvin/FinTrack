@@ -48,3 +48,7 @@ content-type: application/json
 
 ###
  DELETE http://localhost:3001/api/watchlists/6262dadc66def321c8aa20de
+
+
+###
+ GET http://localhost:3001/api/watchlists/6262d9ae66def321c8aa20cb
