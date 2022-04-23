@@ -1,6 +1,7 @@
 services:
   fintrack-frontend:
     image: jasvinjames/fintrack-frontend:latest
+    container_name: fintrack-frontend
     # Keep stdin_open because we don't want this container to exit immediately which it
     # otherwise would have because there's no foreground processes
     stdin_open: true
@@ -12,6 +13,7 @@ services:
 
   fintrack-backend:
     image: jasvinjames/fintrack-backend:latest
+    container_name: fintrack-backend
     ports:
       - "3001:3001"
     networks:
