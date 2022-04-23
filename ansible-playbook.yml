@@ -2,7 +2,7 @@
 - name: Deploy Docker Images
   hosts: all
   vars_files:
-  - .env-demo
+  - ./backend/.env-demo
   tasks:
     - name: Copy Docker Compose file from host machine to remote host
       copy:
