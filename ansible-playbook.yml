@@ -2,12 +2,17 @@
 - name: Deploy Docker Images
   hosts: all
   vars_files:
-  - ./backend/env.yaml
+  - ./backend/env-enc.yaml
   tasks:
     - name: Copy Docker Compose file from host machine to remote host
       copy:
         src: ./docker-compose.yml
         dest: ./
+
+    - name: Replace Jinja2 template with decrypted environment variables into env.yaml file
+      template: 
+        src: env.j2
+        dest: env.yaml
 
     # Pull the Docker images from Docker Hub
     - name: Pull the Docker images specifed in docker-compose
@@ -24,4 +29,4 @@
       command: docker image prune --force
 
     - name: Copy the env.yaml file to backend Docker container
-      command: docker cp ./backend/env.yaml fintrack-backend:/usr/src/app/env.yaml
+      command: docker cp backend/env.yaml fintrack-backend:/usr/src/app/env.yaml

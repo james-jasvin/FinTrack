@@ -1,5 +1,6 @@
-.env
-node_modules# Logs
+env-local.yaml 
+
+# Logs
 logs
 *.log
 npm-debug.log*

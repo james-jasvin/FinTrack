@@ -1,8 +1,8 @@
 import axios from 'axios'
-// const config = require('../config')
+const config = require('../config')
 
-const loginBaseUrl = `/api/login`
-const signupBaseUrl = `/api/users/`
+const loginBaseUrl = `${config.BACKEND_URL}/api/login`
+const signupBaseUrl = `${config.BACKEND_URL}/api/users/`
 
 const login = async (credentials, isLogin) => {
   let response = ""
