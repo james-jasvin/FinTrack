@@ -2,7 +2,7 @@
 - name: Deploy Docker Images
   hosts: all
   vars_files:
-  - ./backend/.env-demo
+  - ./backend/env.yaml
   tasks:
     - name: Copy Docker Compose file from host machine to remote host
       copy:
@@ -23,5 +23,5 @@
     - name: Prune the dangling Docker images
       command: docker image prune --force
 
-    - name: Copy the .env-demo file to backend Docker container
-      command: docker cp ./backend/.env-demo fintrack-backend:/usr/src/app/.env-demo
+    - name: Copy the env.yaml file to backend Docker container
+      command: docker cp ./backend/env.yaml fintrack-backend:/usr/src/app/env.yaml
