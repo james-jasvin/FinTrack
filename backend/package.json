@@ -20,7 +20,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.7",
     "mongoose-unique-validator": "^3.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "yenv": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^8.7.0",

@@ -24,4 +24,4 @@
       command: docker image prune --force
 
     - name: Copy the .env-demo file to backend Docker container
-      command: docker cp .env-demo fintrack-backend:/usr/src/app/.env-demo
+      command: docker cp ./backend/.env-demo fintrack-backend:/usr/src/app/.env-demo
