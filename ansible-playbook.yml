@@ -12,7 +12,7 @@
     - name: Replace Jinja2 template with decrypted environment variables into env.yaml file
       template: 
         src: backend/env.j2
-        dest: backend/env.yaml
+        dest: env.yaml
 
     # Pull the Docker images from Docker Hub
     - name: Pull the Docker images specifed in docker-compose
@@ -29,4 +29,4 @@
       command: docker image prune --force
 
     - name: Copy the env.yaml file to backend Docker container
-      command: docker cp backend/env.yaml fintrack-backend:/usr/src/app/env.yaml
+      command: docker cp env.yaml fintrack-backend:/usr/src/app/env.yaml
