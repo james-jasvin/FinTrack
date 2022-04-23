@@ -3,17 +3,17 @@
 // Also add token authentication to the above route
 
 import axios from 'axios'
-const config = require('../config')
+// const config = require('../config')
 
 // Uncomment the /api/ URLs and remove the non-/api/ URLs once the backend is ready
 
-const watchlistUrl = `${config.BACKEND_URL}/api/watchlists`
+const watchlistUrl = `/api/watchlists`
 // const watchlistUrl = `${config.BACKEND_URL}/watchlists`
 
-const instrumentUrl = `${config.BACKEND_URL}/api/instruments`
+const instrumentUrl = `/api/instruments`
 // const instrumentUrl = `${config.BACKEND_URL}/instruments`
 
-const watchlistInstrumentUrl = `${config.BACKEND_URL}/api/watchlistInstruments`
+const watchlistInstrumentUrl = `/api/watchlistInstruments`
 // const watchlistInstrumentUrl = `${config.BACKEND_URL}/watchlistInstruments`
 
 // const ttStockPriceUrl = 'https://quotes-api.tickertape.in/quotes?sids='
