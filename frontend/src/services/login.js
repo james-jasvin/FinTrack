@@ -2,7 +2,7 @@ import axios from 'axios'
 // const config = require('../config')
 
 const loginBaseUrl = `/api/login`
-const signupBaseUrl = `/api/users`
+const signupBaseUrl = `/api/users/`
 
 const login = async (credentials, isLogin) => {
   let response = ""

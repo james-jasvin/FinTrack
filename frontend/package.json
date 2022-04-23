@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "local-start": "REACT_APP_STAGE=local npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -39,7 +40,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001",
   "devDependencies": {
     "json-server": "^0.17.0"
   }
