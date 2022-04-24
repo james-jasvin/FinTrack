@@ -1,14 +1,13 @@
 const watchlistInstrumentRouter = require('express').Router()
 const WatchlistInstrument = require('../models/watchlistInstrument')
-const Watchlist = require('../models/watchlist')
 const Instrument = require('../models/instrument')
 
 watchlistInstrumentRouter.post('/', async (request, response) => {
 	const body = request.body
 	const user = request.user
     
-	// if(!user)
-	// 	return response.status(401).json({ error: 'token missing or invalid' })
+	if(!user)
+		return response.status(401).json({ error: 'token missing or invalid' })
 
 	const ins = body.instrumentId
 	
@@ -35,13 +34,12 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 	response.status(201).json(watch)
 })
 
-
 watchlistInstrumentRouter.get('/', async (request, response) => {
 	const watchlistId = request.query.watchlistId
 
 	const user = request.user
-	// if(!user)
-	// 	return response.status(401).json({ error: 'token missing or invalid' })
+	if(!user)
+		return response.status(401).json({ error: 'token missing or invalid' })
     
 	const watchlistInstrumentsList = await WatchlistInstrument.find({watchlist: watchlistId}).populate('instrument')
     
@@ -61,12 +59,10 @@ watchlistInstrumentRouter.get('/', async (request, response) => {
 
 })
 
-
-
 watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, response) => {
-	// const user = request.user    
-	// // if(!user)
-	// // 	return response.status(401).json({ error: 'token missing or invalid' })
+	const user = request.user    
+	if(!user)
+		return response.status(401).json({ error: 'token missing or invalid' })
 
 	const watchlistInstrumentId = request.params.watchlistInstrumentid
 	const watchlistInstrument = await WatchlistInstrument.find({_id: watchlistInstrumentId})
@@ -82,7 +78,24 @@ watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, resp
 	return response.status(201).json({ success: true })
 })
 
+watchlistInstrumentRouter.delete('/', async (request, response) => {
+	const user = request.user    
+	if(!user)
+		return response.status(401).json({ error: 'token missing or invalid' })
 
+	const watchlistId = request.query.watchlistId
+	const watchlistInstrument = await WatchlistInstrument.find({watchlist: watchlistId})
+
+	if (!watchlistInstrument) {
+		return response
+			.status(404)
+			.json({ success: false, msg: `no watchlist with id ${watchlistId}` })
+	}
+
+	await WatchlistInstrument.deleteMany({ watchlist: watchlistId })
+
+	return response.status(201).json({ success: true })
+})
 
 
 module.exports = watchlistInstrumentRouter

@@ -5,8 +5,8 @@ watchlistRouter.get('/', async (request, response) => {
 	const userId = request.query.user
 
 	const user = request.user
-	// if(!user)
-	// 	return response.status(401).json({ error: 'token missing or invalid' })
+	if(!user)
+		return response.status(401).json({ error: 'token missing or invalid' })
     
 	const watchlist = await Watchlist.find({user: userId})
     
@@ -52,8 +52,8 @@ watchlistRouter.delete('/:watchlistid', async (request, response) => {
 watchlistRouter.get('/:watchlistid', async (request, response) => {
 
 	const user = request.user
-	// if(!user)
-	// 	return response.status(401).json({ error: 'token missing or invalid' })
+	if(!user)
+		return response.status(401).json({ error: 'token missing or invalid' })
 
 	const watchlistId = request.params.watchlistid
 	const watchlist = await Watchlist.findOne({_id: watchlistId})

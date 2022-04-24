@@ -23,7 +23,11 @@ const fs = require('fs')
 
 // Extract request's body, convert it to string and this output will be tagged as 
 // "data" parameter for morgan log pattern
-morgan.token('data', request => JSON.stringify(request.body))
+morgan.token('data', request => {
+	if (request.body.password)
+		request.body.password = ''
+	return JSON.stringify(request.body)
+})
 
 mongoose.connect(config.MONGODB_URI)
 	.then(() => {

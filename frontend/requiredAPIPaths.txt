@@ -21,6 +21,6 @@ DONE RIGHT NOW - GET /api/instruments => Get all instruments stored in DB
 * 4th DELETE /api/watchlistInstruments?watchlistId={watchlist.id} => Delete all instruments which belong to given watchlist id => Use deleteMany() Mongoose function
 [This request is required when a watchlist is deleted, so all its instruments also have to be deleted]
 
-* 3rd DELETE /api/watchlistInstruments/:watchlistInstrument.id => Delete the watchlist instrument with given id
+* (DONE - 3rd) - DELETE /api/watchlistInstruments/:watchlistInstrument.id => Delete the watchlist instrument with given id
 
 * (DONE FOURTH) GET /api/watchlists/:id => Return watchlist data with given watchlist id

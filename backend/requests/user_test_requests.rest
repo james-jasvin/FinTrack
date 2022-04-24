@@ -9,10 +9,8 @@ content-type: application/json
 }
 
 ###
-
 POST http://localhost:3001/api/users
 content-type: application/json
-
 {
     "username": "Sal", "name": "Sal Vulcano", "password": "123456"
 }
@@ -20,7 +18,6 @@ content-type: application/json
 ###
 POST http://localhost:3001/api/login
 content-type: application/json
-
 {
     "username": "User", "password": "123456"
 }
@@ -34,7 +31,6 @@ GET http://localhost:3001/api/instruments/
 ###
 POST http://localhost:3001/api/watchlists/
 content-type: application/json
-
 {
     "name": "newWatchlist", "isMF": true, "user": "61f0f9ee4e819f6d7d088344"
 }
@@ -55,10 +51,8 @@ content-type: application/json
 ###
 POST http://localhost:3001/api/watchlistInstruments/
 content-type: application/json
-
 {
     "watchlistId": "6262d9ae66def321c8aa20cb", "instrumentId": "62628c7d66b9ee7f9ac3e1d6"
-    
 }
 
 ###
@@ -66,4 +60,8 @@ GET http://localhost:3001/api/watchlistInstruments?watchlistId=6262d9ae66def321c
 
 
 ###
-DELETE  http://localhost:3001/api/watchlistInstruments/62642b3664ef9ca88f91709c
+DELETE http://localhost:3001/api/watchlistInstruments/62642b3664ef9ca88f91709c
+
+
+###
+DELETE http://localhost:3001/api/watchlistInstruments?watchlistId=6262d9ae66def321c8aa20cb
