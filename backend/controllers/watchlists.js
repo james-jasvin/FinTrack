@@ -56,7 +56,7 @@ watchlistRouter.get('/:watchlistid', async (request, response) => {
 	// 	return response.status(401).json({ error: 'token missing or invalid' })
 
 	const watchlistId = request.params.watchlistid
-	const watchlist = await Watchlist.find({_id: watchlistId})
+	const watchlist = await Watchlist.findOne({_id: watchlistId})
 
 	if (!watchlist) {
 		return response
@@ -64,7 +64,7 @@ watchlistRouter.get('/:watchlistid', async (request, response) => {
 			.json({ success: false, msg: `no watchlist with id ${watchlistId}` })
 	}
 
-	response.json(watchlist)
+	response.status(200).json(watchlist)
 })
 
 

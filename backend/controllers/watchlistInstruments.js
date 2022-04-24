@@ -1,7 +1,6 @@
 const watchlistInstrumentRouter = require('express').Router()
 const WatchlistInstrument = require('../models/watchlistInstrument')
-
-//const instrumentRouter = require('express').Router()
+const Watchlist = require('../models/watchlist')
 const Instrument = require('../models/instrument')
 
 watchlistInstrumentRouter.post('/', async (request, response) => {
@@ -11,23 +10,13 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 	// if(!user)
 	// 	return response.status(401).json({ error: 'token missing or invalid' })
 
-	const ins = body.instrument
-	//const instrumentObject = await Instrument.find({_id: ins}).select(['symbol', 'name', 'isMF', 'url'])
-	//const instrumentObject = await Instrument.find({_id: ins}).select([-'id'])
-	// Not able to remove ID from instrument. It is by default
-
-	//const insObject = instrumentObject.toObject()
-
-	// toObject() did not work 
-
+	const ins = body.instrumentId
+	
 	const instrumentObject = await Instrument.findOne({_id: ins})
 
-	// same line with Instrument.find() did not work 
-
-	
 	const watchlistInstrumentObject = new WatchlistInstrument({
-		watchlist: body.watchlist,
-		instrument: body.instrument
+		watchlist: body.watchlistId,
+		instrument: body.instrumentId
         
 	})
 
@@ -38,19 +27,59 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 		name: instrumentObject.name,
 		isMF: instrumentObject.isMF,
 		url: instrumentObject.url,
-		instrumentId: savedWatchlistInstrument.watchlist,
-		watchlistId: savedWatchlistInstrument.instrument,
+		instrumentId: savedWatchlistInstrument.instrument,
+		watchlistId: savedWatchlistInstrument.watchlist,
 		id: savedWatchlistInstrument.id
 	}
 
-
-	// const watch = {
-	//     ...savedWatchlistInstrument,
-	//     ...instrumentObject
-	// }
-
 	response.status(201).json(watch)
+})
 
+
+watchlistInstrumentRouter.get('/', async (request, response) => {
+	const watchlistId = request.query.watchlistId
+
+	const user = request.user
+	// if(!user)
+	// 	return response.status(401).json({ error: 'token missing or invalid' })
+    
+	const watchlistInstrumentsList = await WatchlistInstrument.find({watchlist: watchlistId}).populate('instrument')
+    
+	const modifiedWatchlistInstrumentsList = watchlistInstrumentsList.map((watchlistInstrument) =>{
+		return {
+			symbol: watchlistInstrument.instrument.symbol,
+			name: watchlistInstrument.instrument.name,
+			isMF: watchlistInstrument.instrument.isMF,
+			url: watchlistInstrument.instrument.url,
+			instrumentId: watchlistInstrument.instrument.id,
+			watchlistId: watchlistInstrument.watchlist,
+			id: watchlistInstrument.id
+		}
+	})	
+
+	response.status(200).json(modifiedWatchlistInstrumentsList)
+
+})
+
+
+
+watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, response) => {
+	// const user = request.user    
+	// // if(!user)
+	// // 	return response.status(401).json({ error: 'token missing or invalid' })
+
+	const watchlistInstrumentId = request.params.watchlistInstrumentid
+	const watchlistInstrument = await WatchlistInstrument.find({_id: watchlistInstrumentId})
+
+	if (!watchlistInstrument) {
+		return response
+			.status(404)
+			.json({ success: false, msg: `no watchlistInstrument with id ${watchlistInstrumentId}` })
+	}
+
+	await WatchlistInstrument.deleteOne({ _id: watchlistInstrumentId })
+
+	return response.status(201).json({ success: true })
 })
 
 
