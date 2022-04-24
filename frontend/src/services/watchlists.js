@@ -13,7 +13,7 @@ const watchlistUrl = `${config.BACKEND_URL}/api/watchlists`
 const instrumentUrl = `${config.BACKEND_URL}/api/instruments`
 // const instrumentUrl = `${config.BACKEND_URL}/instruments`
 
-const watchlistInstrumentUrl = `/api/watchlistInstruments`
+const watchlistInstrumentUrl = `${config.BACKEND_URL}/api/watchlistInstruments`
 // const watchlistInstrumentUrl = `${config.BACKEND_URL}/watchlistInstruments`
 
 // const ttStockPriceUrl = 'https://quotes-api.tickertape.in/quotes?sids='
