@@ -8,6 +8,7 @@ const loginRouter = require('./controllers/login')
 const userRouter = require('./controllers/users')
 const instrumentRouter = require('./controllers/instruments')
 const watchlistRouter = require('./controllers/watchlists')
+const watchlistInstrumentRouter = require('./controllers/watchlistInstruments')
 // const testingRouter = require('./controllers/test')
 const middleware = require('./utils/middleware')
 
@@ -57,6 +58,7 @@ app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/instruments', instrumentRouter)
 app.use('/api/watchlists', middleware.userExtractor, watchlistRouter)
+app.use('/api/watchlistInstruments', middleware.userExtractor, watchlistInstrumentRouter)
 
 
 // This is how you should include your API controller

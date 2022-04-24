@@ -52,3 +52,13 @@ content-type: application/json
 
 ###
  GET http://localhost:3001/api/watchlists/6262d9ae66def321c8aa20cb
+
+
+###
+POST http://localhost:3001/api/watchlistInstruments/
+content-type: application/json
+
+{
+    "watchlist": "6262d9ae66def321c8aa20cb", "instrument": "62628c7d66b9ee7f9ac3e1d6"
+    
+}
