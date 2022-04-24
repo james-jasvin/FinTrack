@@ -1,17 +1,33 @@
 ---
 - name: Deploy Docker Images
   hosts: all
+  vars_files:
+  - ./backend/env-enc.yaml
   tasks:
-
     - name: Copy Docker Compose file from host machine to remote host
       copy:
         src: ./docker-compose.yml
         dest: ./
 
+    - name: Replace Jinja2 template with decrypted environment variables into env.yaml file
+      template: 
+        src: backend/env.j2
+        dest: env.yaml
+
     # Pull the Docker images from Docker Hub
     - name: Pull the Docker images specifed in docker-compose
       command: docker-compose pull
 
+    # We don't start the containers because we need to copy the env.yaml file into the backend container
+    # before we can start anything.
+    # So we first create the containers so that the next command "docker cp" can run properly
+    - name: Create containers for the pulled Docker images
+      command: docker-compose up --no-start
+
+    - name: Copy the env.yaml file to backend Docker container
+      command: docker cp env.yaml fintrack-backend:/usr/src/app/env.yaml
+
+    # Now we actually run the Docker containers because the env.yaml has been copied and the app will no longer crash
     # Detached mode is required, otherwise Jenkins build never exits
     # even though the docker-compose up command has successfully executed
     - name: Run the pulled Docker images in detached mode

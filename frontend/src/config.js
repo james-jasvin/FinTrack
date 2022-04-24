@@ -3,4 +3,5 @@
   But such variable names must begin with REACT_APP and that's why
   the environment variable is named such here
 */
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
+export const BACKEND_URL = process.env.REACT_APP_STAGE === 'local'? 'http://localhost:3001': process.env.REACT_APP_BACKEND_URL

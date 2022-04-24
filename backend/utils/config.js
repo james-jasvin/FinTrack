@@ -1,7 +1,16 @@
-require('dotenv').config()
+const yenv = require('yenv')
 
-const PORT = process.env.PORT
-const MONGODB_URI = process.env.NODE_ENV === 'test'? process.env.MONGODB_TEST_URI: process.env.MONGODB_URI
-const SECRET = process.env.SECRET
+let env = null
+
+// If production environment then use env.yaml for the environment variables
+// Otherwise use env-local.yaml for the same
+if (process.env.NODE_ENV == 'production')
+	env = yenv()
+else
+	env = yenv('env-local.yaml')
+
+const PORT = env.PORT
+const MONGODB_URI = env.MONGODB_URI
+const SECRET = env.SECRET
 
 module.exports = { PORT, MONGODB_URI, SECRET }

@@ -1,0 +1,14 @@
+production:
+  PORT: '3001'
+  MONGODB_URI: 'mongodb+srv://user-1:jasvin%40123@phonebook-app-cluster.9zpkj.mongodb.net/fintrack-app?retryWrites=true&w=majority'
+  SECRET: 'asjjhjhjsadhbasdsa8347u834'
+
+test:
+  PORT: '3001'
+  MONGODB_URI: 'mongodb+srv://user-1:jasvin%40123@phonebook-app-cluster.9zpkj.mongodb.net/fintrack-test-app?retryWrites=true&w=majority'
+  SECRET: 'asjjhjhjsadhbasdsa8347u834'
+
+development:
+  PORT: '3001'
+  MONGODB_URI: 'mongodb+srv://user-1:jasvin%40123@phonebook-app-cluster.9zpkj.mongodb.net/fintrack-app?retryWrites=true&w=majority'
+  SECRET: 'asjjhjhjsadhbasdsa8347u834'

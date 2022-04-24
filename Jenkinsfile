@@ -48,7 +48,6 @@ pipeline {
 				}
 			}
         
-			// CHECK SYNTAX OF THESE TWO SH COMMANDS
 			stage('Removing Docker Images from Local') {
 				steps {
 					sh "docker rmi $DOCKERHUB_REGISTRY-frontend:latest"
