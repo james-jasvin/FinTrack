@@ -9,7 +9,7 @@ const Instrument = require('../models/instrument')
 
 instrumentRouter.get('/', async (request, response) => {
 	const instruments = await Instrument.find({})
-	response.json(instruments)
+	response.status(200).json(instruments)
 })
 
 module.exports = instrumentRouter

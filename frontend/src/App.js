@@ -1,16 +1,10 @@
 // TODO: 
 
-// Can .env file contain actual IP address instead of localhost, perhaps can use Ansible playbook for this
-// Get the IP Address from the inventory file or something
-
-// Add footer and fancy stuff like that
 // Can use reactjs-popup to replace the alert window dialog boxes
 // Can add, react-alerts to replace the basic notification system that we have going on right now, but its a bit of a work to integrate
 
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
 // Think of possibilities where elements can be deleted at backend but still appear at frontend, not added at frontend but already added at backend
-
-// Fetch stock and MF prices from public APIs => CORS issue right now => Find public stock + MF API that provides access with API keys
 
 // Topic of discussion, should users be able to view shared watchlists without logging in to an account?
 // If yes, then GET watchlistInstruments and GET watchlists routes have to function without authentication
@@ -32,7 +26,7 @@ import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 
 import { 
-  Switch, Route, useRouteMatch
+  Switch, Route, useRouteMatch, Redirect
 } from 'react-router-dom'
 import NavBar from './components/NavBar'
 
@@ -196,6 +190,9 @@ const App = () => {
     }
   }, [user])
   
+  const checkWhetherWatchlistInstrumentsLoaded = watchlists => {
+    return watchlists.filter(w => w.instruments).length === watchlists.length
+  }
 
   return (
     <div>
@@ -224,11 +221,18 @@ const App = () => {
             <Watchlist watchlist={watchlist} removeWatchlist={null} removeWatchlistInstrument={null} />
           </Route>
 
-          <Route path="/search">
-            <Search instruments={instruments} watchlists={watchlists} addToWatchlist={addToWatchlist}/>
+          <Route path='/search'>
+            {
+              // If watchlists or instruments haven't loaded or if even one watchlist doesn't have instruments
+              // property loaded then redirect to home page instead of remaining on search page
+              // It's a stopgap solution but it is what it is :(
+              watchlists && instruments && checkWhetherWatchlistInstrumentsLoaded(watchlists)?
+              <Search instruments={instruments} watchlists={watchlists} addToWatchlist={addToWatchlist}/>:
+              <Redirect to='/' />
+            } 
           </Route>
 
-          <Route path="/">
+          <Route path='/'>
             {/* <Toggleable buttonLabel={'Click Here!'} ref={watchlistFormRef}> */}
               <WatchlistForm createWatchlist={createWatchlist} />
             {/* </Toggleable> */}

@@ -24,13 +24,15 @@ const Search = ({ watchlists, instruments, addToWatchlist }) => {
     <div className="m-5">
       <div className='input-group regular-shadow rounded' id='search-bar'>
         <div className='input-group-prepend'>
-          <span className='input-group-text bg-dark text-light border-dark'><i class="fa-solid fa-magnifying-glass"></i></span>
+          <span className='input-group-text bg-dark text-light border-dark'>
+            <i className='fa-solid fa-magnifying-glass'></i>
+          </span>
         </div>
         <input type="text" className='form-control form-control-lg' placeholder="Search for Stocks or MFs" value={ filterText } onChange={ event => setFilterText(event.target.value) }/>
       </div>
 
       <div className="rounded mt-5 regular-shadow" id="search-results">
-        <div className="regular-shadow p-2 pl-3 rounded" id="search-results-header"><h3>Search Results</h3> </div>
+        <div className="regular-shadow p-2 pl-3 rounded" id="search-results-header"><h3>Search Results</h3></div>
         <div className="pb-4 pt-2">
           { filteredInstruments.length?
             filteredInstruments.map( ins =>

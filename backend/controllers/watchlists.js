@@ -10,7 +10,7 @@ watchlistRouter.get('/', async (request, response) => {
     
 	const watchlist = await Watchlist.find({user: userId})
     
-	response.json(watchlist)
+	response.status(200).json(watchlist)
 })
 
 watchlistRouter.post('/', async (request, response) => {
@@ -38,15 +38,12 @@ watchlistRouter.delete('/:watchlistid', async (request, response) => {
 	const watchlistId = request.params.watchlistid
 	const watchlist = await Watchlist.find({_id: watchlistId})
 
-	if (!watchlist) {
-		return response
-			.status(404)
-			.json({ success: false, msg: `no watchlist with id ${watchlistId}` })
-	}
+	if (!watchlist)
+		return response.status(404).json({ success: false, msg: `no watchlist with id ${watchlistId}` })
 
 	await Watchlist.deleteOne({ _id: watchlistId })
 
-	return response.status(201).json({ success: true })
+	response.status(201).json({ success: true })
 })
 
 watchlistRouter.get('/:watchlistid', async (request, response) => {
@@ -58,11 +55,8 @@ watchlistRouter.get('/:watchlistid', async (request, response) => {
 	const watchlistId = request.params.watchlistid
 	const watchlist = await Watchlist.findOne({_id: watchlistId})
 
-	if (!watchlist) {
-		return response
-			.status(404)
-			.json({ success: false, msg: `no watchlist with id ${watchlistId}` })
-	}
+	if (!watchlist)
+		return response.status(404).json({ success: false, msg: `no watchlist with id ${watchlistId}` })
 
 	response.status(200).json(watchlist)
 })

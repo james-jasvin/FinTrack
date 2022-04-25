@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
 const Instrument = ({ watchlists, instrument, addToWatchlist }) => {
-  // Only show those watchlists which do not have the given instrument already present in them
-  const filteredWatchlists = watchlists.filter(w => w.instruments.filter(ins => ins.symbol === instrument.symbol).length === 0)
-
   const [ selectedWatchlist, setSelectedWatchlist ] = useState(-1)
+
+  // Only show those watchlists which do not have the given instrument already present in them
+  const filteredWatchlists = watchlists.filter(w => 
+    w.instruments.filter(ins => ins.symbol === instrument.symbol).length === 0
+  )
 
   const createWatchlistInstrument = (event) => {
     const watchlistIdx = event.target.value

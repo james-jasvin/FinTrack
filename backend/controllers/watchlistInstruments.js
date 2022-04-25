@@ -16,7 +16,6 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 	const watchlistInstrumentObject = new WatchlistInstrument({
 		watchlist: body.watchlistId,
 		instrument: body.instrumentId
-        
 	})
 
 	const savedWatchlistInstrument = await watchlistInstrumentObject.save()
@@ -56,7 +55,6 @@ watchlistInstrumentRouter.get('/', async (request, response) => {
 	})	
 
 	response.status(200).json(modifiedWatchlistInstrumentsList)
-
 })
 
 watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, response) => {
@@ -75,7 +73,7 @@ watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, resp
 
 	await WatchlistInstrument.deleteOne({ _id: watchlistInstrumentId })
 
-	return response.status(201).json({ success: true })
+	response.status(201).json({ success: true })
 })
 
 watchlistInstrumentRouter.delete('/', async (request, response) => {
@@ -94,7 +92,7 @@ watchlistInstrumentRouter.delete('/', async (request, response) => {
 
 	await WatchlistInstrument.deleteMany({ watchlist: watchlistId })
 
-	return response.status(201).json({ success: true })
+	response.status(201).json({ success: true })
 })
 
 
