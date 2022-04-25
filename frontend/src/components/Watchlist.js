@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import WatchlistInstrument from './WatchlistInstrument'
+const config = require('../config')
 
 const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) => {
   const [ visibility, setVisibility ] = useState(false)
@@ -19,15 +20,19 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
   // If no watchlist has been loaded yet, then return null immediately to avoid errors
   if (!watchlist)
     return (
-      <div>
-        {
-          removeWatchlist? 'Watchlist data not fetched yet': 'Invalid watchlist ID'
-        }
+      <div className='m-5 p-2 rounded regular-shadow' id="watchlists">
+        <h2 className='ml-2'>Your Watchlists</h2>
+        <h5 className='ml-3'>
+          {
+            removeWatchlist? 'Watchlist data not fetched yet': 'Invalid watchlist ID'
+          }
+        </h5>
+        
       </div>
     )
 
   // CHANGE THIS URL ONCE DEPLOYED OR USE ENVIRONMENT VARIABLES
-  const watchlistUrl = `http://localhost:3000/watchlists/${watchlist.id}`
+  const watchlistUrl = `${config.FRONTEND_URL}/watchlists/${watchlist.id}`
 
   const watchlistStyle = {
     marginBottom: 5,
