@@ -20,15 +20,19 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
   // If no watchlist has been loaded yet, then return null immediately to avoid errors
   if (!watchlist)
     return (
-      <div className='m-5 p-2 rounded regular-shadow' id="watchlists">
-        <h2 className='ml-2'>Your Watchlists</h2>
-        <h5 className='ml-3'>
-          {
-            removeWatchlist? 'Watchlist data not fetched yet': 'Invalid watchlist ID'
-          }
-        </h5>
-        
-      </div>
+      <>
+        {
+          removeWatchlist?
+          <div className='m-5 p-2 rounded regular-shadow' id='watchlists'>
+            <h2 className='ml-2'>Your Watchlists</h2>
+            <h5 className='ml-3'>Watchlist data not fetched yet</h5>
+          </div>
+          :
+          <div className='m-2 p-2 rounded regular-shadow watchlist'>
+            <h5 className='ml-3'>Data not fetched yet or invalid watchlist ID</h5>
+          </div>
+        }
+      </>
     )
 
   // CHANGE THIS URL ONCE DEPLOYED OR USE ENVIRONMENT VARIABLES
@@ -113,7 +117,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                           removeWatchlistInstrument={removeWatchlistInstrument}
                         />
                       )
-                      : <span className='pl-4'>No instruments added to this watchlist yet</span>
+                      : <h5 className='pl-4'>No instruments added to this watchlist yet</h5>
                   }
                 </div>
         }
