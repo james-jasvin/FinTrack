@@ -13,7 +13,7 @@ const Search = ({ watchlists, instruments, addToWatchlist }) => {
   // Filtering on the basis of text in filter input text box (case insensitive)
   // filter text can be present anywhere in the stock's or MF's name or symbol and it will still be a match
   // Can also use regex here but this is just way simpler
-  const filteredInstruments = filterText === ''? []: instruments.filter(ins => 
+  const filteredInstruments = filterText === ''? instruments: instruments.filter(ins => 
     ins.name.toLowerCase().includes(filterText.toLowerCase()) || ins.symbol.toLowerCase().includes(filterText.toLowerCase())
   )
 

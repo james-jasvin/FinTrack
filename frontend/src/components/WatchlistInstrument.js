@@ -24,7 +24,7 @@ const WatchlistInstrument = ({ watchlist, instrument, removeWatchlistInstrument 
             // This can be checked as, removeWatchlistInstrument is null if non-owner is viewing and non-null otherwise
             removeWatchlistInstrument &&
             <li className='nav-item'>
-              <button onClick={deleteWatchlistInstrument} className='delete-watchlist-instrument remove-button btn btn-link border'><i class="fa-solid fa-trash-can text-light"></i></button>
+              <button onClick={deleteWatchlistInstrument} className='delete-watchlist-instrument remove-button btn btn-link border'><i className="fa-solid fa-trash-can text-light"></i></button>
             </li>  
           }
         </ul>

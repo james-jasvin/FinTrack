@@ -21,8 +21,12 @@ const logger = require('./utils/logger')
 const morgan = require('morgan')
 const fs = require('fs')
 
-// Extract request's body, convert it to string and this output will be tagged as 
-// "data" parameter for morgan log pattern
+/*
+	- Extract request's body and convert it to string
+	- This output will be tagged as "data" parameter for morgan log pattern
+	- If request body contains password parameter then set it to '' before setting it as data parameter for Morgan
+	- This prevents logging of passwords to the log file, thereby enhancing security
+*/
 morgan.token('data', request => {
 	if (request.body.password)
 		request.body.password = ''
@@ -63,10 +67,6 @@ app.use('/api/login', loginRouter)
 app.use('/api/instruments', instrumentRouter)
 app.use('/api/watchlists', middleware.userExtractor, watchlistRouter)
 app.use('/api/watchlistInstruments', middleware.userExtractor, watchlistInstrumentRouter)
-
-
-// This is how you should include your API controller
-// app.use('/api/blogs', middleware.userExtractor, blogsRouter)
 
 // Can skip for now
 // if (process.env.NODE_ENV === 'test')
