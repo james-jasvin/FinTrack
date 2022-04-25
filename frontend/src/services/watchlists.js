@@ -43,6 +43,7 @@ const getWatchlistData = async (watchlistId) => {
     return null
 
   const watchlist = response.data
+  console.log(watchlist)
 
   // Fetch watchlist instruments data
   response = await axios.get(`${watchlistInstrumentUrl}?watchlistId=${watchlistId}`, config) 

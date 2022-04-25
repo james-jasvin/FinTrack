@@ -8,6 +8,7 @@ const loginRouter = require('./controllers/login')
 const userRouter = require('./controllers/users')
 const instrumentRouter = require('./controllers/instruments')
 const watchlistRouter = require('./controllers/watchlists')
+const watchlistInstrumentRouter = require('./controllers/watchlistInstruments')
 // const testingRouter = require('./controllers/test')
 const middleware = require('./utils/middleware')
 
@@ -22,7 +23,11 @@ const fs = require('fs')
 
 // Extract request's body, convert it to string and this output will be tagged as 
 // "data" parameter for morgan log pattern
-morgan.token('data', request => JSON.stringify(request.body))
+morgan.token('data', request => {
+	if (request.body.password)
+		request.body.password = ''
+	return JSON.stringify(request.body)
+})
 
 mongoose.connect(config.MONGODB_URI)
 	.then(() => {
@@ -57,6 +62,7 @@ app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/instruments', instrumentRouter)
 app.use('/api/watchlists', middleware.userExtractor, watchlistRouter)
+app.use('/api/watchlistInstruments', middleware.userExtractor, watchlistInstrumentRouter)
 
 
 // This is how you should include your API controller
