@@ -143,9 +143,6 @@ const deleteWatchlistInstrument = async (watchlistInstrument) => {
   }
 
   const response = await axios.delete(`${watchlistInstrumentUrl}/${watchlistInstrument.id}`, config)
-  // Add request to delete WatchlistInstruments which have watchlistId=${watchlist.id}
-  // Something like, DELETE /api/watchlistInstruments?watchlistId=${watchlist.id}
-  // Use the deleteMany() function in Mongoose to achieve this in the backend
   return response.data
 }
 
@@ -158,10 +155,6 @@ const addWatchlistInstrument = async (watchlistInstrument) => {
   }
 
   const response = await axios.post(watchlistInstrumentUrl, watchlistInstrument, config)
-
-  // Add request to delete WatchlistInstruments which have watchlistId=${watchlist.id}
-  // Something like, DELETE /api/watchlistInstruments?watchlistId=${watchlist.id}
-  // Use the deleteMany() function in Mongoose to achieve this in the backend
   return response.data
 }
 
