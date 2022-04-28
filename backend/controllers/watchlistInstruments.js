@@ -2,6 +2,9 @@ const watchlistInstrumentRouter = require('express').Router()
 const WatchlistInstrument = require('../models/watchlistInstrument')
 const Instrument = require('../models/instrument')
 
+
+// Create watchlist-instrument with given watchlist-id and instrument-id in request body
+
 watchlistInstrumentRouter.post('/', async (request, response) => {
 	const body = request.body
 	const user = request.user
@@ -33,6 +36,9 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 	response.status(201).json(watch)
 })
 
+
+// Return all watchlist-instruments which belong to given watchlist-id
+
 watchlistInstrumentRouter.get('/', async (request, response) => {
 	const watchlistId = request.query.watchlistId
 
@@ -57,6 +63,9 @@ watchlistInstrumentRouter.get('/', async (request, response) => {
 	response.status(200).json(modifiedWatchlistInstrumentsList)
 })
 
+
+// Delete the watchlist-instrument with given watchlistInstrument-id
+
 watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, response) => {
 	const user = request.user    
 	if(!user)
@@ -75,6 +84,9 @@ watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, resp
 
 	response.status(201).json({ success: true })
 })
+
+
+// Delete all instruments which belong to given watchlist-id 
 
 watchlistInstrumentRouter.delete('/', async (request, response) => {
 	const user = request.user    
