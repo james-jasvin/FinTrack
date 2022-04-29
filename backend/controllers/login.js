@@ -13,9 +13,6 @@ const config = require('../utils/config')
   - Return the token, username, name and user id upon successful login with 200 status code
   - Otherwise return 401 status code with error message in response
 */
-
-// Verify user login credentials which are given in request body
-
 loginRouter.post('/', async (request, response) => {
 	const body = request.body
 

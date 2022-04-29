@@ -3,7 +3,6 @@ const Watchlist = require('../models/watchlist')
 
 
 // Return all watchlists which have given user-id in the query
-
 watchlistRouter.get('/', async (request, response) => {
 	const userId = request.query.user
 
@@ -18,7 +17,6 @@ watchlistRouter.get('/', async (request, response) => {
 
 
 // Create watchlist with data given in request body
-
 watchlistRouter.post('/', async (request, response) => {
 	const body = request.body
 	const user = request.user
@@ -38,7 +36,6 @@ watchlistRouter.post('/', async (request, response) => {
 
 
 // Delete watchlist with given watchlist-id
-
 watchlistRouter.delete('/:watchlistid', async (request, response) => {
 	const user = request.user    
 	if(!user)
@@ -57,7 +54,6 @@ watchlistRouter.delete('/:watchlistid', async (request, response) => {
 
 
 // Return watchlist data with given watchlist-id
-
 watchlistRouter.get('/:watchlistid', async (request, response) => {
 
 	const user = request.user

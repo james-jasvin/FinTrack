@@ -19,6 +19,8 @@ services:
     networks:
       fintrack:
         ipv4_address: 172.28.1.7
+    volumes:
+      - ./backend/logs:/usr/src/app/logs/
   
 networks:
   fintrack:

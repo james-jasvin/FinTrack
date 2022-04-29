@@ -55,7 +55,7 @@ app.use(express.json())
 */
 if (process.env.NODE_ENV === 'production')
 	app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :data', {
-		stream: fs.createWriteStream('./access.log', {flags: 'a'})
+		stream: fs.createWriteStream('./logs/access.log', {flags: 'a'})
 	}))
 else if (process.env.NODE_ENV === 'development')
 	app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :data'))
