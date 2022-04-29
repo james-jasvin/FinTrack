@@ -4,9 +4,9 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt') 
 
 /*
-	- Return all users in the database database
-	- populate() method fills the data for the specified field, i.e. watchlists field with its "id" and "name"
-	- It is equivalent to a join operation in SQL DBs
+* Return all users in the database database
+* populate() method fills the data for the specified field, i.e. watchlists field with its "id" and "name"
+* It is equivalent to a join operation in SQL DBs
 */
 userRouter.get('/', async (request, response) => {
 	const users = await User.find({})
@@ -14,19 +14,17 @@ userRouter.get('/', async (request, response) => {
 })
 
 /*
-	- Create a new user in the database using the data provided in the request
-	- Do validation checks in the password specified so that it satisfies the criteria for a good password
-	- Encrypt the password using bcrypt to obtain the hash value and store this data in the DB
-	- Return the saved user (which will also include user id added by MongoDB) back
-		as a response with 201 Status (Content Created)
+* Create a new user in the database using the data provided in the request
+* Do validation checks in the password specified so that it satisfies the criteria for a good password
+* Encrypt the password using bcrypt to obtain the hash value and store this data in the DB
+* Return the saved user (which will also include user id added by MongoDB) back
+* as a response with 201 Status (Content Created)
 */
 userRouter.post('/', async (request, response) => {
 	const body = request.body
 
 	if (body.password.length < 3)
 		return response.status(400).json({ error: 'password should have length atleast 3' })
-
-	// TODO: Can add more validation requirements in the password as required in this section
 
 	const saltRounds = 10
 	const passwordHash = await bcrypt.hash(body.password, saltRounds)
