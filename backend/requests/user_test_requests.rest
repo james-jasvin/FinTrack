@@ -31,8 +31,9 @@ GET http://localhost:3001/api/instruments/
 ###
 POST http://localhost:3001/api/watchlists/
 content-type: application/json
+
 {
-    "name": "newWatchlist", "isMF": true, "user": "61f0f9ee4e819f6d7d088344"
+    "name": "testingPurpose", "isMF": false, "user": "62627adc938c975d9ba9576b"
 }
 
 
@@ -51,9 +52,14 @@ content-type: application/json
 ###
 POST http://localhost:3001/api/watchlistInstruments/
 content-type: application/json
+
 {
-    "watchlistId": "6262d9ae66def321c8aa20cb", "instrumentId": "62628c7d66b9ee7f9ac3e1d6"
+    "watchlistId": "6262d9ae66def321c8aa20cb", "instrumentId": "62628dbf7bd49b46c5468775"
 }
+
+# {
+#     "watchlistId": "6262d9ae66def321c8aa20cb", "instrumentId": "62628c7d66b9ee7f9ac3e1d6"  
+# }
 
 ###
 GET http://localhost:3001/api/watchlistInstruments?watchlistId=6262d9ae66def321c8aa20cb

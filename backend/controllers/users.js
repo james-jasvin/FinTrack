@@ -1,13 +1,15 @@
 
 const userRouter = require('express').Router()
 const User = require('../models/user')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt') 
 
 /*
 	- Return all users in the database database
 	- populate() method fills the data for the specified field, i.e. watchlists field with its "id" and "name"
 	- It is equivalent to a join operation in SQL DBs
 */
+
+// Return all users
 
 userRouter.get('/', async (request, response) => {
 	const users = await User.find({})
@@ -21,6 +23,10 @@ userRouter.get('/', async (request, response) => {
 	- Return the saved user (which will also include user id added by MongoDB) back
 		as a response with 201 Status (Content Created)
 */
+
+
+// Create user with details given in request body
+
 userRouter.post('/', async (request, response) => {
 	const body = request.body
 

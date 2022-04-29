@@ -1,6 +1,9 @@
 const watchlistRouter = require('express').Router()
 const Watchlist = require('../models/watchlist')
 
+
+// Return all watchlists which have given user-id in the query
+
 watchlistRouter.get('/', async (request, response) => {
 	const userId = request.query.user
 
@@ -12,6 +15,9 @@ watchlistRouter.get('/', async (request, response) => {
     
 	response.status(200).json(watchlist)
 })
+
+
+// Create watchlist with data given in request body
 
 watchlistRouter.post('/', async (request, response) => {
 	const body = request.body
@@ -30,6 +36,9 @@ watchlistRouter.post('/', async (request, response) => {
 	response.status(201).json(savedWatchlist)
 })
 
+
+// Delete watchlist with given watchlist-id
+
 watchlistRouter.delete('/:watchlistid', async (request, response) => {
 	const user = request.user    
 	if(!user)
@@ -39,12 +48,15 @@ watchlistRouter.delete('/:watchlistid', async (request, response) => {
 	const watchlist = await Watchlist.find({_id: watchlistId})
 
 	if (!watchlist)
-		return response.status(404).json({ success: false, msg: `no watchlist with id ${watchlistId}` })
+		return response.status(404).json({ success: false, msg: `no watchlist with id '${watchlistId}'` })
 
 	await Watchlist.deleteOne({ _id: watchlistId })
 
 	response.status(201).json({ success: true })
 })
+
+
+// Return watchlist data with given watchlist-id
 
 watchlistRouter.get('/:watchlistid', async (request, response) => {
 
@@ -56,7 +68,7 @@ watchlistRouter.get('/:watchlistid', async (request, response) => {
 	const watchlist = await Watchlist.findOne({_id: watchlistId})
 
 	if (!watchlist)
-		return response.status(404).json({ success: false, msg: `no watchlist with id ${watchlistId}` })
+		return response.status(404).json({ success: false, msg: `no watchlist with id '${watchlistId}'` })
 
 	response.status(200).json(watchlist)
 })

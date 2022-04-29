@@ -1,6 +1,10 @@
 const watchlistInstrumentRouter = require('express').Router()
 const WatchlistInstrument = require('../models/watchlistInstrument')
 const Instrument = require('../models/instrument')
+const Watchlist = require('../models/watchlist')
+
+
+// Create watchlist-instrument with given watchlist-id and instrument-id in request body
 
 watchlistInstrumentRouter.post('/', async (request, response) => {
 	const body = request.body
@@ -8,11 +12,24 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
     
 	if(!user)
 		return response.status(401).json({ error: 'token missing or invalid' })
-
-	const ins = body.instrumentId
 	
-	const instrumentObject = await Instrument.findOne({_id: ins})
+	const checkWatchlistInstrumentId = await WatchlistInstrument.findOne({watchlist: body.watchlistId, instrument: body.instrumentId})
+	
+	const watchlistObject = await Watchlist.findOne({_id: body.watchlistId})
+	const instrumentObject = await Instrument.findOne({_id: body.instrumentId})
+	
+	if(checkWatchlistInstrumentId)
+		return response.status(401).json({ error: `You have already added '${instrumentObject.name}' to watchlist '${watchlistObject.name}'` })	
 
+	if(watchlistObject.isMF !== instrumentObject.isMF)
+	{
+		if(watchlistObject.isMF === true)
+			return response.status(401).json({ error: `Stock '${instrumentObject.symbol}' cannot be added to MF watchlist '${watchlistObject.name}'` })
+		
+		else
+			return response.status(401).json({ error: `MF '${instrumentObject.symbol}' cannot be added to Stock watchlist '${watchlistObject.name}'` })
+	}
+		
 	const watchlistInstrumentObject = new WatchlistInstrument({
 		watchlist: body.watchlistId,
 		instrument: body.instrumentId
@@ -32,6 +49,9 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 
 	response.status(201).json(watch)
 })
+
+
+// Return all watchlist-instruments which belong to given watchlist-id
 
 watchlistInstrumentRouter.get('/', async (request, response) => {
 	const watchlistId = request.query.watchlistId
@@ -57,6 +77,9 @@ watchlistInstrumentRouter.get('/', async (request, response) => {
 	response.status(200).json(modifiedWatchlistInstrumentsList)
 })
 
+
+// Delete the watchlist-instrument with given watchlistInstrument-id
+
 watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, response) => {
 	const user = request.user    
 	if(!user)
@@ -68,13 +91,16 @@ watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, resp
 	if (!watchlistInstrument) {
 		return response
 			.status(404)
-			.json({ success: false, msg: `no watchlistInstrument with id ${watchlistInstrumentId}` })
+			.json({ success: false, msg: `no watchlistInstrument with id '${watchlistInstrumentId}'` })
 	}
 
 	await WatchlistInstrument.deleteOne({ _id: watchlistInstrumentId })
 
 	response.status(201).json({ success: true })
 })
+
+
+// Delete all instruments which belong to given watchlist-id 
 
 watchlistInstrumentRouter.delete('/', async (request, response) => {
 	const user = request.user    
@@ -87,7 +113,7 @@ watchlistInstrumentRouter.delete('/', async (request, response) => {
 	if (!watchlistInstrument) {
 		return response
 			.status(404)
-			.json({ success: false, msg: `no watchlist with id ${watchlistId}` })
+			.json({ success: false, msg: `no watchlist with id '${watchlistId}'` })
 	}
 
 	await WatchlistInstrument.deleteMany({ watchlist: watchlistId })
