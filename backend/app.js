@@ -9,7 +9,6 @@ const userRouter = require('./controllers/users')
 const instrumentRouter = require('./controllers/instruments')
 const watchlistRouter = require('./controllers/watchlists')
 const watchlistInstrumentRouter = require('./controllers/watchlistInstruments')
-// const testingRouter = require('./controllers/test')
 const middleware = require('./utils/middleware')
 
 const cors = require('cors')
@@ -67,10 +66,6 @@ app.use('/api/login', loginRouter)
 app.use('/api/instruments', instrumentRouter)
 app.use('/api/watchlists', middleware.userExtractor, watchlistRouter)
 app.use('/api/watchlistInstruments', middleware.userExtractor, watchlistInstrumentRouter)
-
-// Can skip for now
-// if (process.env.NODE_ENV === 'test')
-// 	app.use('/api/testing', testingRouter)
 
 // Any unrecognized routes will be handled by the unknownEndpoint middleware which has to be added secondlast
 app.use(middleware.unknownEndpoint)
