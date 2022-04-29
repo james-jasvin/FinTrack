@@ -11,6 +11,7 @@ content-type: application/json
 ###
 POST http://localhost:3001/api/users
 content-type: application/json
+
 {
     "username": "Sal", "name": "Sal Vulcano", "password": "123456"
 }

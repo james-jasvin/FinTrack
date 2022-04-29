@@ -5,7 +5,6 @@ const Watchlist = require('../models/watchlist')
 
 
 // Create watchlist-instrument with given watchlist-id and instrument-id in request body
-
 watchlistInstrumentRouter.post('/', async (request, response) => {
 	const body = request.body
 	const user = request.user
@@ -13,6 +12,9 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 	if(!user)
 		return response.status(401).json({ error: 'token missing or invalid' })
 	
+	if (!body.watchlistId || !body.instrumentId)
+		return response.status(400).json({ error: 'missing watchlistId or instrumentId in request' })
+
 	const checkWatchlistInstrumentId = await WatchlistInstrument.findOne({watchlist: body.watchlistId, instrument: body.instrumentId})
 	
 	const watchlistObject = await Watchlist.findOne({_id: body.watchlistId})
@@ -52,7 +54,6 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 
 
 // Return all watchlist-instruments which belong to given watchlist-id
-
 watchlistInstrumentRouter.get('/', async (request, response) => {
 	const watchlistId = request.query.watchlistId
 
@@ -79,7 +80,6 @@ watchlistInstrumentRouter.get('/', async (request, response) => {
 
 
 // Delete the watchlist-instrument with given watchlistInstrument-id
-
 watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, response) => {
 	const user = request.user    
 	if(!user)
@@ -88,7 +88,7 @@ watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, resp
 	const watchlistInstrumentId = request.params.watchlistInstrumentid
 	const watchlistInstrument = await WatchlistInstrument.find({_id: watchlistInstrumentId})
 
-	if (!watchlistInstrument) {
+	if (!watchlistInstrument || watchlistInstrument.length === 0) {
 		return response
 			.status(404)
 			.json({ success: false, msg: `no watchlistInstrument with id '${watchlistInstrumentId}'` })
@@ -101,7 +101,6 @@ watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, resp
 
 
 // Delete all instruments which belong to given watchlist-id 
-
 watchlistInstrumentRouter.delete('/', async (request, response) => {
 	const user = request.user    
 	if(!user)
@@ -110,7 +109,7 @@ watchlistInstrumentRouter.delete('/', async (request, response) => {
 	const watchlistId = request.query.watchlistId
 	const watchlistInstrument = await WatchlistInstrument.find({watchlist: watchlistId})
 
-	if (!watchlistInstrument) {
+	if (!watchlistInstrument || watchlistInstrument.length === 0) {
 		return response
 			.status(404)
 			.json({ success: false, msg: `no watchlist with id '${watchlistId}'` })
