@@ -14,11 +14,21 @@ pipeline {
 				steps {
 					// credentials are required because its a private repository
 					git url: 'https://github.com/james-jasvin/FinTrack.git',
-					branch: 'backend-testing',
+					branch: 'master',
 					credentialsId: 'github-pat'
 				}
 			}
         
+			stage ('Running React Tests (Jest)') {
+				steps {
+					sh '''
+							cd frontend
+							npm ci
+							npm run test
+					'''
+				}
+			}
+			
 			stage ('Running API Tests (Supertest)') {
 				steps {
 					sh '''

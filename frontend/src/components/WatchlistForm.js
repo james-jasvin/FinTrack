@@ -29,7 +29,7 @@ const WatchlistForm = ({ createWatchlist }) => {
         </div>
 
         <div className='form-radio-group' onChange={event => setIsMF(event.target.value === 'mf')}>
-          <input type='radio' id='mf' name='watchlist-type' value='mf' className='mr-2' data-testid='mf-radio-button'/>
+          <input required type='radio' id='mf' name='watchlist-type' value='mf' className='mr-2' data-testid='mf-radio-button'/>
           <label htmlFor='mf'>Mutual Funds Watchlist</label><br/>
           <input type='radio' id='stock' name='watchlist-type' value='stock' className='mr-2'/>
           <label htmlFor='stock'>Stocks Watchlist</label><br/>
