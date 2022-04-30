@@ -21,17 +21,16 @@ pipeline {
         
 			stage ('Running API Tests (Supertest)') {
 				steps {
-					sh "cd backend"
-					sh "echo $ANSIBLE_VAULT_CREDENTIALS > secret.txt"
-					sh "ansible-vault decrypt env-enc.yaml --vault-password-file secret.txt"
-					sh "npm run test"
-					sh "ansible-vault encrypt env-enc.yaml --vault-password-file secret.txt"
-					sh '''#!/bin/sh
-								if [ -f secret.txt ] ; then
-									rm secret.txt
-								fi
+					sh '''
+							cd backend
+							echo $ANSIBLE_VAULT_CREDENTIALS > secret.txt
+							ansible-vault decrypt env-enc.yaml --vault-password-file secret.txt
+							npm run test
+							ansible-vault encrypt env-enc.yaml --vault-password-file secret.txt
+							if [ -f secret.txt ] ; then
+								rm secret.txt
+							fi
 					'''
-					sh "cd .."
 				}
 			}
 
