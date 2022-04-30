@@ -3,6 +3,7 @@ pipeline {
     environment {
 			DOCKERHUB_REGISTRY = "jasvinjames/fintrack"
 			DOCKERHUB_CREDENTIALS = credentials('dockerhub-id')
+			ANSIBLE_VAULT_CREDENTIALS = credentials('fintrack-ansible-vault-password')
     }
     
     agent any 
@@ -18,6 +19,16 @@ pipeline {
 				}
 			}
         
+			stage ('Running API Tests (Supertest)') {
+				steps {
+					sh "cd backend"
+					sh "ansible-vault decrypt env-enc.yaml --vault-password-file $ANSIBLE_VAULT_CREDENTIALS"
+					sh "npm run test"
+					sh "ansible-vault encrypt env-enc.yaml --vault-password-file $ANSIBLE_VAULT_CREDENTIALS"
+					sh "cd .."
+				}
+			}
+
 			stage('Build Fintrack Backend Docker Image') {
 				steps {
 			    sh "docker build -t $DOCKERHUB_REGISTRY-backend:latest backend/"
