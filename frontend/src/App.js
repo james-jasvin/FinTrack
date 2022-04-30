@@ -82,8 +82,18 @@ const App = () => {
 
       if (isLogin)
         notificationHandler(`Logged in successfully as ${userObject.name}`, 'success')
-      else
+      else {
         notificationHandler(`Signed up successfully as ${userObject.name}`, 'success')
+
+        // This is to handle a very specific bug,
+        // If user was logged in as another user, the watchlists state will contain their watchlists
+        // Now if user signs up for another account, the watchlists state will still contain the old user's watchlists
+        // and will be able to see both which is an issue
+        // This doesn't happen when login happens because that user will have their own watchlists which will be fetched
+        // via Effect hook and accordingly setWatchlists will be called
+        setWatchlists([])
+      }
+        
     }
     catch (exception) {
       notificationHandler(exception.response.data.error, 'error')
