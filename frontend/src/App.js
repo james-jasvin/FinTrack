@@ -1,14 +1,19 @@
 // TODO: 
 
+// Username shouldn't be empty for signup, same goes for all other text input parameters
+
+// Change Is MF watchlist checkbox to radio button for better UX, convert result to boolean for the backend to remain as is
+
+// The following points are invalid now because MongoDB objectIDs are no longer dependent on MAC address and things like that
+// https://stackoverflow.com/questions/4587523/mongodb-is-it-safe-to-use-documents-id-in-public
+// Don't store user id on localStorage, send only the JWT token, create a mapping from token to user id or extract
+// user id from token & secret
+
 // Can use reactjs-popup to replace the alert window dialog boxes
 // Can add, react-alerts to replace the basic notification system that we have going on right now, but its a bit of a work to integrate
 
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
 // Think of possibilities where elements can be deleted at backend but still appear at frontend, not added at frontend but already added at backend
-
-// Topic of discussion, should users be able to view shared watchlists without logging in to an account?
-// If yes, then GET watchlistInstruments and GET watchlists routes have to function without authentication
-// If no, then current implementation works as it should
 
 import React, { useState, useEffect, useRef } from 'react'
 

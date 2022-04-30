@@ -35,7 +35,6 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
       </>
     )
 
-  // CHANGE THIS URL ONCE DEPLOYED OR USE ENVIRONMENT VARIABLES
   const watchlistUrl = `${config.FRONTEND_URL}/watchlists/${watchlist.id}`
 
   const watchlistStyle = {
@@ -64,7 +63,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                   // Only show toggling of watchlist feature when not in single watchlist view mode
                   removeWatchlist?
                   <li className="nav-item active">
-                    <button onClick={toggleVisibility} className='visibility-button btn btn-link'>
+                    <button onClick={toggleVisibility} className='visibility-button btn btn-link' data-testid='visibility-button'>
                       {visibility? <i className="fa-solid fa-angle-up"></i>: <i className="fa-solid fa-angle-down"></i>}
                     </button>
                   </li>
@@ -99,29 +98,30 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
         <div className='ml-4 mb-4 h5 copiedLinkSuccess'>{ copiedLinkSuccess }</div>
 
       </div>
-      <div className='watchlist-details'>
-        {
-          // If in single watchlist view mode => removeWatchlist === null, then visibility doesn't matter and we should show WatchlistInstruments
-          // If in normal watchlist view mode => removeWatchlist !== null, then visibility should be true for showing WatchlistInstruments
-          // The summary of these two conditions is, (removeWatchlist === null || visibility)
-          (removeWatchlist === null || visibility) &&
-                <div className='watchlist-content rounded p-2 regular-shadow'>
-                  {
-                    watchlist.instruments.length > 0?
-                      watchlist.instruments.map(
-                        instrument => 
-                        <WatchlistInstrument 
-                          watchlist={watchlist}
-                          instrument={instrument}
-                          key={instrument.id}
-                          removeWatchlistInstrument={removeWatchlistInstrument}
-                        />
-                      )
-                      : <h5 className='pl-4'>No instruments added to this watchlist yet</h5>
-                  }
-                </div>
-        }
-      </div>
+      {
+        // If in single watchlist view mode => removeWatchlist === null, then visibility doesn't matter and we should show WatchlistInstruments
+        // If in normal watchlist view mode => removeWatchlist !== null, then visibility should be true for showing WatchlistInstruments
+        // The summary of these two conditions is, (removeWatchlist === null || visibility)
+        (removeWatchlist === null || visibility) &&
+        <div className='watchlist-details' data-testid='watchlist-details'>
+          <div className='watchlist-content rounded p-2 regular-shadow'>
+            {
+              watchlist.instruments.length > 0?
+                watchlist.instruments.map(
+                  instrument => 
+                  <WatchlistInstrument 
+                    watchlist={watchlist}
+                    instrument={instrument}
+                    key={instrument.id}
+                    removeWatchlistInstrument={removeWatchlistInstrument}
+                  />
+                )
+                : <h5 className='pl-4'>No instruments added to this watchlist yet</h5>
+            }
+          </div>
+        </div>
+      }
+      
     </div>
   )
 }
