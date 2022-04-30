@@ -25,6 +25,7 @@ pipeline {
 							cd backend
 							echo $ANSIBLE_VAULT_CREDENTIALS > secret.txt
 							ansible-vault decrypt env-enc.yaml --vault-password-file secret.txt
+							npm ci
 							npm run test
 							ansible-vault encrypt env-enc.yaml --vault-password-file secret.txt
 							if [ -f secret.txt ] ; then

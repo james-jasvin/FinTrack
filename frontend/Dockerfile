@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install the dependencies mentioned in package.json
-RUN npm install
+RUN npm ci
 
 # Copy the local files to the "app" folder
 COPY . .
