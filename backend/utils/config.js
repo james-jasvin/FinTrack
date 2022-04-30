@@ -6,6 +6,8 @@ let env = null
 // Otherwise use env-local.yaml for the same
 if (process.env.NODE_ENV == 'production')
 	env = yenv()
+else if (process.env.NODE_ENV == 'test')
+	env = yenv('env-enc.yaml')
 else
 	env = yenv('env-local.yaml')
 
