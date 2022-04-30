@@ -25,6 +25,10 @@ module.exports = {
 		'semi': [
 			'error',
 			'never'
+		],
+		'testing-library/no-render-in-setup': [
+			'error',
+			{'allowTestingFrameworkSetupHook': 'beforeAll'}
 		]
 	}
 }
