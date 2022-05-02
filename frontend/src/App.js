@@ -1,8 +1,11 @@
 // TODO: 
 
+// Add GitHub Webhook
+
 // Username shouldn't be empty for signup, same goes for all other text input parameters
 
-// Change Is MF watchlist checkbox to radio button for better UX, convert result to boolean for the backend to remain as is
+// Can add loading animations for any action as deployed environment is quite slow 
+// Maybe you can only implement this on the heroku-netlify-deployment branch
 
 // The following points are invalid now because MongoDB objectIDs are no longer dependent on MAC address and things like that
 // https://stackoverflow.com/questions/4587523/mongodb-is-it-safe-to-use-documents-id-in-public
