@@ -1,6 +1,5 @@
 // TODO: 
 
-
 // Username shouldn't be empty for signup, same goes for all other text input parameters
 
 // Can add loading animations for any action as deployed environment is quite slow 
