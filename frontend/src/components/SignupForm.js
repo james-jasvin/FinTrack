@@ -13,8 +13,8 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
 
     // If user bypassed pattern attribute on frontend, then block the signup attempt here and display the same
     // customValidity message on the username form input element
-    if (username.match(RegExp(/^[a-z\d]+$/i))) {
-      document.getElementById('signup-username').setCustomValidity(username_error_message)
+    if (!username.match(RegExp(/^[a-z][a-z\d]+$/i))) {
+      // document.getElementById('signup-username').setCustomValidity(username_error_message)
     }
 
     const credentials= {
@@ -55,9 +55,7 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
                 value={username}
                 onChange={event => setUsername(event.target.value)}
                 id='signup-username' 
-                pattern='/^[a-z\d]+$/i'
-                onInvalid={event => event.target.setCustomValidity(username_error_message)}
-                required
+                pattern='^[a-zA-Z][a-zA-Z\d]+$'    
               />
             </div>
 
