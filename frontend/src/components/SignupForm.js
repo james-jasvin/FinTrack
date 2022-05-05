@@ -5,8 +5,17 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
   const [ password, setPassword ] = useState('')
   const [ name, setName ] = useState('')
 
+  // Error message to be displayed when username contains non-letters or digits
+  const username_error_message = 'Username should begin with a letter and can contain letters and digits only.'
+
   const handleSignup = (event) => {
     event.preventDefault()
+
+    // If user bypassed pattern attribute on frontend, then block the signup attempt here and display the same
+    // customValidity message on the username form input element
+    if (username.match(RegExp(/^[a-z\d]+$/i))) {
+      document.getElementById('signup-username').setCustomValidity(username_error_message)
+    }
 
     const credentials= {
       username, password, name
@@ -20,6 +29,8 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
     setName('')
   }
 
+  // We assign pattern to username field so that it only contains letters and digits, must start with a letter as well
+  // and we assign the custom error message above if this pattern check fails
   return (
     <div className='form-container'>
       <div className='form-box regular-shadow'>
@@ -37,7 +48,17 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
               <div className='input-group-prepend'>
                 <span className='input-group-text'><i className='fa fa-user'></i></span>
               </div>
-              <input type='text' className='form-control' placeholder='Username' value={username} onChange={event => setUsername(event.target.value)} id='signup-username' required/>
+              <input
+                type='text'
+                className='form-control'
+                placeholder='Username'
+                value={username}
+                onChange={event => setUsername(event.target.value)}
+                id='signup-username' 
+                pattern='/^[a-z\d]+$/i'
+                onInvalid={event => event.target.setCustomValidity(username_error_message)}
+                required
+              />
             </div>
 
             <div className='input-group mb-3'>
@@ -58,11 +79,6 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
             <button type='button' className='btn btn-secondary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>LOGIN INSTEAD</button>
 
           </form>
-          {/* <div className="social">
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-twitter-square"></i></a>
-            <a href="#"><i className="fab fa-google"></i></a>
-          </div> */}
         </div>
       </div>
     </div>

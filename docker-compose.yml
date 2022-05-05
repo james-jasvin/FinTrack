@@ -20,7 +20,7 @@ services:
       fintrack:
         ipv4_address: 172.28.1.7
     # Using Docker volume for persisting logs
-    # ./backend/logs refers to path on the host machine under the /var/lib/docker folder
+    # ./backend/logs refers to the path /home/backend/logs on the host machine
     # and we're linking it to logs folder on the container machine where Morgan logger logs its output
     volumes:
       - ./backend/logs:/usr/src/app/logs/

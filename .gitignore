@@ -1,4 +1,7 @@
 env-local.yaml 
+docker-compose-elk.yml
+grok-pattern.txt
+logstash_pipeline/
 
 # Logs
 logs
