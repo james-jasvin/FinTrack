@@ -92,7 +92,7 @@ watchlistInstrumentRouter.get('/', async (request, response) => {
 
 /*
 * Delete the watchlist-instrument with given watchlistInstrument-id
-* Check if watchlist-id exists. If it does, delete it 
+* Check if watchlist-id exists. If it does, delete watchlist-instrument from WatchlistInstrument Database 
 * Otherwise return 404 status code with error "Invalid Watchlist-id"
 */
 watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, response) => {
@@ -117,7 +117,7 @@ watchlistInstrumentRouter.delete('/:watchlistInstrumentid', async (request, resp
 
 /*
 * Delete all instruments which belong to given watchlist-id 
-* Check if watchlist-id exists. If it does, delete it 
+* Check if watchlist-id exists. If it does, delete all the instruments belonging to this watchlist from WatchListInstrument Database 
 * Otherwise return 404 status code with error "Invalid Watchlist-id"
 */
 watchlistInstrumentRouter.delete('/', async (request, response) => {
