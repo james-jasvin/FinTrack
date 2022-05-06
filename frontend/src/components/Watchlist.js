@@ -25,11 +25,39 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
           removeWatchlist?
           <div className='m-5 p-2 rounded regular-shadow' id='watchlists'>
             <h2 className='ml-2'>Your Watchlists</h2>
-            <h5 className='ml-3'>Watchlist data not fetched yet</h5>
+            <h5 className='ml-3'>Watchlist data not fetched yet </h5>
+            <div>
+            <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
           </div>
           :
-          <div className='m-2 p-2 rounded regular-shadow watchlist'>
+          <div className='m-2 p-2 rounded regular-shadow watchlist text-center'>
             <h5 className='ml-3'>Data not fetched yet or invalid watchlist ID</h5>
+            <div className='ml-3'>
+              <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
           </div>
         }
       </>

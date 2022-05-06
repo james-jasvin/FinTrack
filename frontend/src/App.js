@@ -1,7 +1,5 @@
 // TODO: 
 
-// Username shouldn't be empty for signup, same goes for all other text input parameters
-
 // Can add loading animations for any action as deployed environment is quite slow 
 // Maybe you can only implement this on the heroku-netlify-deployment branch
 
