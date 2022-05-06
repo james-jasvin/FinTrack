@@ -12,7 +12,7 @@ let watchlistsStored = null
 
 beforeEach(async () => {
   // Increasing timeout otherwise sometimes a timeout error can wreck the whole testing phase
-  jest.setTimeout(30000) 
+  jest.setTimeout(100000) 
 
   await User.deleteMany({})
   await User.insertMany(helper.initialUsers)
