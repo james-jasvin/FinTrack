@@ -12,6 +12,8 @@ if (process.env.NODE_ENV == 'production')
 	env = yenv()
 else if (process.env.NODE_ENV == 'test')
 	env = yenv('env-enc.yaml')
+else if (process.env.NODE_ENV == 'production-heroku')
+	env = process.env
 else
 	env = yenv('env-local.yaml')
 

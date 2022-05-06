@@ -3,7 +3,7 @@ body, html{
   background: rgb(56, 53, 53);
   background-image: url(assets/background2.jpeg);
   background-repeat: no-repeat;
-  /*Ensures backgground covers entire element by maintaining proportions*/
+  /*Ensures background covers entire element by maintaining proportions*/
   background-attachment: fixed;
   /*Ensures background covers full element even without maintaining proportions which is what we want*/
   background-size: 100% 100%;

@@ -1,7 +1,5 @@
 // TODO: 
 
-// Username shouldn't be empty for signup, same goes for all other text input parameters
-
 // Can add loading animations for any action as deployed environment is quite slow 
 // Maybe you can only implement this on the heroku-netlify-deployment branch
 
@@ -16,7 +14,7 @@
 // Test with more stocks and MFs in the DB => Think of a method to add more instruments in the DB => Add API but what about security? Add admin login?
 // Think of possibilities where elements can be deleted at backend but still appear at frontend, not added at frontend but already added at backend
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import watchlistService from './services/watchlists'
 import loginService from './services/login'
@@ -57,9 +55,6 @@ const App = () => {
   // These states are used to control the notifications that show up at the top of the screen for events like login, signup, watchlist creation, etc.
   const [ notification, setNotification ] = useState(null)
   const [ notificationType, setNotificationType ] = useState(null)
-
-  // A useRef hook to attach to Watchlist Form component, so that we can toggle the visibility of the form on and off
-  const watchlistFormRef = useRef()
 
   // A useRouteMatch that will check whether the current page's route matches the pattern /watchlists/:id
   // match = Object that contains various information about route matched including the "id" in path, if route matched successfully
@@ -204,6 +199,7 @@ const App = () => {
       .getWatchlistData(match.params.id)
       .then(data => setWatchlist(data))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
   
   const checkWhetherWatchlistInstrumentsLoaded = watchlists => {

@@ -6,16 +6,17 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
   const [ name, setName ] = useState('')
 
   // Error message to be displayed when username contains non-letters or digits
-  const username_error_message = 'Username should begin with a letter and can contain letters and digits only.'
+  const username_error_message = 'Username should have atleast three characters. Must begin with a letter and can contain letters and digits only'
 
   const handleSignup = (event) => {
     event.preventDefault()
 
     // If user bypassed pattern attribute on frontend, then block the signup attempt here and display the same
     // customValidity message on the username form input element
-    if (username.match(RegExp(/^[a-z\d]+$/i))) {
+    if (!username.match(RegExp(/^[a-z][a-z\d]{2,}$/i)))
       document.getElementById('signup-username').setCustomValidity(username_error_message)
-    }
+    else
+      document.getElementById('signup-username').setCustomValidity('')
 
     const credentials= {
       username, password, name
@@ -30,7 +31,9 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
   }
 
   // We assign pattern to username field so that it only contains letters and digits, must start with a letter as well
-  // and we assign the custom error message above if this pattern check fails
+  // and we assign the custom error message above if this pattern check fails via the onInvalid event handler
+  // The onInput event handler ensures that the customValidity message is reset otherwise form can never be submitted
+  // once the onInvalid event was triggered
   return (
     <div className='form-container'>
       <div className='form-box regular-shadow'>
@@ -55,8 +58,9 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
                 value={username}
                 onChange={event => setUsername(event.target.value)}
                 id='signup-username' 
-                pattern='/^[a-z\d]+$/i'
+                pattern='^[a-zA-Z][a-zA-Z\d]{2,}$'
                 onInvalid={event => event.target.setCustomValidity(username_error_message)}
+                onInput={event => event.target.setCustomValidity('')}
                 required
               />
             </div>
