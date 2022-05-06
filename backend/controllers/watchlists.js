@@ -1,7 +1,11 @@
 const watchlistRouter = require('express').Router()
 const Watchlist = require('../models/watchlist')
 
-// Return all watchlists which have given user-id in the query
+/*
+* Return all watchlists which belong to given user (user-id)
+* Check whether user has sent jwt token in packet header
+* Otherwise, return 401 status code with error "invalid token" 
+*/
 watchlistRouter.get('/', async (request, response) => {
 	const userId = request.query.user
 
@@ -14,7 +18,10 @@ watchlistRouter.get('/', async (request, response) => {
 	response.status(200).json(watchlist)
 })
 
-// Create watchlist with data given in request body
+
+/*
+* Create a new watchlist in the database with data provided in request body 
+*/
 watchlistRouter.post('/', async (request, response) => {
 	const body = request.body
 	const user = request.user
