@@ -17,7 +17,7 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 		return response.status(401).json({ error: 'token missing or invalid' })
 	
 	if (!body.watchlistId || !body.instrumentId)
-		return response.status(401).json({ error: 'missing watchlistId or instrumentId in request' })
+		return response.status(400).json({ error: 'missing watchlistId or instrumentId in request' })
 
 	const checkWatchlistInstrumentId = await WatchlistInstrument.findOne({watchlist: body.watchlistId, instrument: body.instrumentId})
 	

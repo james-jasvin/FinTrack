@@ -118,7 +118,7 @@ describe('adding a watchlist instrument', () => {
 			.post('/api/watchlistInstruments')
 			.send(watchlistInstrument)
 			.set('Authorization', `Bearer ${user.body.token}`)
-			.expect(401)
+			.expect(400)
 	})
 
   test('mf instrument cannot be added to stock watchlist', async () => {
@@ -131,7 +131,7 @@ describe('adding a watchlist instrument', () => {
 			.post('/api/watchlistInstruments')
 			.send(watchlistInstrument)
 			.set('Authorization', `Bearer ${user.body.token}`)
-			.expect(401)
+			.expect(400)
 	})
 
   test('cannot add same instrument twice in the same watchlist', async () => {
@@ -144,7 +144,7 @@ describe('adding a watchlist instrument', () => {
 			.post('/api/watchlistInstruments')
 			.send(watchlistInstrument)
 			.set('Authorization', `Bearer ${user.body.token}`)
-			.expect(401)
+			.expect(400)
 	})
 })
 
