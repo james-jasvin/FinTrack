@@ -1,7 +1,11 @@
 const watchlistRouter = require('express').Router()
 const Watchlist = require('../models/watchlist')
 
-// Return all watchlists which have given user-id in the query
+/*
+* Return all watchlists which belong to given user (user-id)
+* Check whether user has sent jwt token in packet header
+* Otherwise, return 401 status code with error "invalid token" 
+*/
 watchlistRouter.get('/', async (request, response) => {
 	const userId = request.query.user
 
@@ -14,7 +18,13 @@ watchlistRouter.get('/', async (request, response) => {
 	response.status(200).json(watchlist)
 })
 
-// Create watchlist with data given in request body
+
+/*
+* Create a new watchlist in the database with data provided in request body.
+* Check whether user has sent jwt token in packet header
+* Otherwise, return 401 status code with error "invalid token"
+* Return watchlist name, type, user-id upon successful creation with 201 status code  
+*/
 watchlistRouter.post('/', async (request, response) => {
 	const body = request.body
 	const user = request.user
@@ -32,7 +42,12 @@ watchlistRouter.post('/', async (request, response) => {
 	response.status(201).json(savedWatchlist)
 })
 
-// Delete watchlist with given watchlist-id
+
+/*
+* Delete watchlist with given watchlist-id
+* Check if watchlist-id exists. If it does, delete given watchlist from Watchlist Database 
+* Otherwise return 404 status code with error "Invalid Watchlist-id"
+*/
 watchlistRouter.delete('/:watchlistid', async (request, response) => {
 	const user = request.user    
 	if(!user)
@@ -49,7 +64,12 @@ watchlistRouter.delete('/:watchlistid', async (request, response) => {
 	response.status(201).json({ success: true })
 })
 
-// Return watchlist data with given watchlist-id
+
+/*
+* Return watchlist data with given watchlist-id in route params.
+* Check if the watchlistid is valid. If not, return status code 404 with error "Invalid watchlist-id"
+* Otherwise return watchlist data from Database. 
+*/
 watchlistRouter.get('/:watchlistid', async (request, response) => {
 	const user = request.user
 	if(!user)
