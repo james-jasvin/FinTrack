@@ -15,7 +15,7 @@ const WatchlistForm = ({ createWatchlist }) => {
     createWatchlist(watchlist)
 
     setName('')
-    setIsMF('')
+    setIsMF(false)
   }
 
   return (
