@@ -10,13 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "fintrack-420" # Must be unique in Heroku
+          heroku_app_name: "fintrack-420"
           heroku_email: "jamesjasvin5@gmail.com"
+          # Specifies the directory in the repository that will be treated as the root by Heroku
+          # because we are only deploying the backend, that is our appdir
           appdir: "backend"
         env:
+          # All environment variables for this Action must be specified with the HD_ prefix
           HD_MONGODB_URI: ${{secrets.MONGODB_URI}}
           HD_PORT: ${{secrets.PORT}}
           HD_SECRET: ${{secrets.SECRET}}

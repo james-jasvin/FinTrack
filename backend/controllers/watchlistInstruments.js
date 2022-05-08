@@ -5,9 +5,11 @@ const Watchlist = require('../models/watchlist')
 
 /*
 * Create a new watchlist-instrument with given watchlist-id and instrument-id in request body
-* Check if a watchlist-instrument already exists in the given watchlist with desired instrument. If yes, return 401 status code with error "Duplicate Watchlist-nstrument"
+* Check if a watchlist-instrument already exists in the given watchlist with desired instrument.
+* If yes, return 401 status code with the error "Duplicate Watchlist-Instrument"
 * Check if added instrument is of same type as watchlist. If not, return 401 status code with type-mismatch error 
-* Otherwise, return the symbol, name, type, url, id , watchlist-id, instrument-id upon successful creation with 201 status code
+* Otherwise, return the symbol, name, type, url, id , watchlist-id, instrument-id upon successful creation
+* with 201 status code
 */
 watchlistInstrumentRouter.post('/', async (request, response) => {
 	const body = request.body
