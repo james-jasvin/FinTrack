@@ -218,8 +218,14 @@ const App = () => {
       
       <Notification notification={notification} type={notificationType} />
 
-      { user === null && showLoginForm && <LoginForm startLogin={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
-      { user === null && showLoginForm === false && <SignupForm startSignup={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/> }
+      {
+        user === null && showLoginForm && 
+        <LoginForm startLogin={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/>
+      }
+      { 
+        user === null && showLoginForm === false &&
+        <SignupForm startSignup={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/>
+      }
 
       {
         user !== null && 
@@ -249,7 +255,11 @@ const App = () => {
               <WatchlistForm createWatchlist={createWatchlist} />
             {/* </Toggleable> */}
             
-            <Watchlists watchlists={watchlists} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} />
+            <Watchlists
+              watchlists={watchlists}
+              removeWatchlist={removeWatchlist}
+              removeWatchlistInstrument={removeWatchlistInstrument}
+            />
           </Route>
 
         </Switch>  

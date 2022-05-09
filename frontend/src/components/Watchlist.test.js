@@ -33,7 +33,9 @@ describe('<Watchlist />', () => {
   }
 
   test('watchlist rendered with name and watchlist instruments are not visible', () => {
-    const { container } = render(<Watchlist watchlist={watchlist} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} />)
+    const { container } = render(
+      <Watchlist watchlist={watchlist} removeWatchlist={removeWatchlist} removeWatchlistInstrument={removeWatchlistInstrument} />
+    )
     expect(container).toHaveTextContent('Test Watchlist 1')
     expect(screen.queryByText('TCS')).toBeNull()
   })
