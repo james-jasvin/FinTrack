@@ -2,6 +2,7 @@ const watchlistInstrumentRouter = require('express').Router()
 const WatchlistInstrument = require('../models/watchlistInstrument')
 const Instrument = require('../models/instrument')
 const Watchlist = require('../models/watchlist')
+const sanitize = require('mongo-sanitize');
 
 /*
 * Create a new watchlist-instrument with given watchlist-id and instrument-id in request body
@@ -12,19 +13,21 @@ const Watchlist = require('../models/watchlist')
 * with 201 status code
 */
 watchlistInstrumentRouter.post('/', async (request, response) => {
-	const body = request.body
 	const user = request.user
-    
+  
+	const watchlistId = sanitize(request.body.watchlistId)
+	const instrumentId = sanitize(request.body.instrumentId)
+
 	if(!user)
 		return response.status(401).json({ error: 'token missing or invalid' })
 	
-	if (!body.watchlistId || !body.instrumentId)
+	if (!watchlistId || !instrumentId)
 		return response.status(400).json({ error: 'missing watchlistId or instrumentId in request' })
 
-	const checkWatchlistInstrumentId = await WatchlistInstrument.findOne({watchlist: body.watchlistId, instrument: body.instrumentId})
+	const checkWatchlistInstrumentId = await WatchlistInstrument.findOne({watchlist: watchlistId, instrument: instrumentId})
 	
-	const watchlistObject = await Watchlist.findOne({_id: body.watchlistId})
-	const instrumentObject = await Instrument.findOne({_id: body.instrumentId})
+	const watchlistObject = await Watchlist.findOne({_id: watchlistId})
+	const instrumentObject = await Instrument.findOne({_id: instrumentId})
 	
 	if(checkWatchlistInstrumentId)
 		return response.status(400).json({ error: `You have already added '${instrumentObject.name}' to watchlist '${watchlistObject.name}'` })	
@@ -39,8 +42,8 @@ watchlistInstrumentRouter.post('/', async (request, response) => {
 	}
 		
 	const watchlistInstrumentObject = new WatchlistInstrument({
-		watchlist: body.watchlistId,
-		instrument: body.instrumentId
+		watchlist: watchlistId,
+		instrument: instrumentId
 	})
 
 	const savedWatchlistInstrument = await watchlistInstrumentObject.save()

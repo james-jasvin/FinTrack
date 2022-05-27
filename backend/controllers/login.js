@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const loginRouter = require('express').Router()
 const config = require('../utils/config')
+const sanitize = require('mongo-sanitize');
 
 /*
 * For the provided username, check whether such a user exists in the DB
@@ -14,9 +15,11 @@ const config = require('../utils/config')
 */
 loginRouter.post('/', async (request, response) => {
 	const body = request.body
+	const username = sanitize(body.username)
+	const password = sanitize(body.password)
 
-	const user = await User.findOne({ username: body.username })
-	const passwordCorrect = user === null? false: await bcrypt.compare(body.password, user.passwordHash)
+	const user = await User.findOne({ username })
+	const passwordCorrect = user === null? false: await bcrypt.compare(password, user.passwordHash)
 
 	if (!passwordCorrect)
 		return response.status(401).json({ error: 'Invalid username or password' })

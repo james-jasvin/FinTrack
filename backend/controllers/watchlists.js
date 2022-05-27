@@ -1,5 +1,6 @@
 const watchlistRouter = require('express').Router()
 const Watchlist = require('../models/watchlist')
+const sanitize = require('mongo-sanitize');
 
 /*
 * Return all watchlists which belong to given user (user-id)
@@ -75,7 +76,7 @@ watchlistRouter.get('/:watchlistid', async (request, response) => {
 	if(!user)
 		return response.status(401).json({ error: 'token missing or invalid' })
 
-	const watchlistId = request.params.watchlistid
+	const watchlistId = sanitize(request.params.watchlistid) 
 	const watchlist = await Watchlist.findOne({_id: watchlistId})
 
 	if (!watchlist)
