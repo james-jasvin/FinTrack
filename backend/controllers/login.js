@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const loginRouter = require('express').Router()
 const config = require('../utils/config')
-const sanitize = require('mongo-sanitize');
+const sanitize = require('mongo-sanitize')
 
 /*
 * For the provided username, check whether such a user exists in the DB
