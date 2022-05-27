@@ -1,5 +1,12 @@
 import React from 'react'
 
+/*
+  This component is used to render a Watchlist Instrument which contains the following,
+    - Instrument Symbol
+    - Instrumen Name
+    - TickerTape link
+    - Delete button for deleting the watchlist instrument
+*/
 const WatchlistInstrument = ({ watchlist, instrument, removeWatchlistInstrument }) => {
 
   const deleteWatchlistInstrument = () => {
@@ -20,7 +27,7 @@ const WatchlistInstrument = ({ watchlist, instrument, removeWatchlistInstrument 
           </li>
           
           {
-            // Only show option to delete watchlist instrument if owner of watchlist is viewing
+            // Only show option to delete watchlist instrument if creator of watchlist is viewing
             // This can be checked as, removeWatchlistInstrument is null if non-owner is viewing and non-null otherwise
             removeWatchlistInstrument &&
             <li className='nav-item'>

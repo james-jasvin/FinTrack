@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 
+/*
+  This component renders the Signup Form with all its functionalities and provides an option
+  for switching to the Login Form on a button click
+*/
 const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
@@ -30,10 +34,16 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
     setName('')
   }
 
-  // We assign pattern to username field so that it only contains letters and digits, must start with a letter as well
-  // and we assign the custom error message above if this pattern check fails via the onInvalid event handler
-  // The onInput event handler ensures that the customValidity message is reset otherwise form can never be submitted
-  // once the onInvalid event was triggered
+  /*
+    We assign a pattern attribute to username field so that we can check the following criteria for a username
+    - Contains only letters and digits
+    - Must start with a letter
+    - Must have length atleast 3
+    
+    And we assign the above custom error message if this pattern check fails via the onInvalid event handler
+    The onInput event handler ensures that the customValidity message is reset otherwise form can never be submitted
+    once the onInvalid event was triggered
+  */
   return (
     <div className='form-container'>
       <div className='form-box regular-shadow'>
@@ -69,19 +79,41 @@ const SignupForm = ({ startSignup, showLoginForm, setShowLoginForm }) => {
               <div className='input-group-prepend'>
                 <span className='input-group-text'><i className='fa fa-lock'></i></span>
               </div>
-              <input type='password' className='form-control' placeholder='Password' value={password} onChange={event => setPassword(event.target.value)} id='signup-password' required/>
+              <input
+                type='password'
+                className='form-control'
+                placeholder='Password'
+                value={password}
+                onChange={event => setPassword(event.target.value)}
+                id='signup-password'
+                required
+              />
             </div>
 
             <div className='input-group mb-3'>
               <div className='input-group-prepend'>
                 <span className='input-group-text'><i className='fa fa-user-secret'></i></span>
               </div>
-              <input type='text' className='form-control' placeholder='Name' value={name} onChange={event => setName(event.target.value)} id='signup-name' required/>
+              <input
+                type='text'
+                className='form-control'
+                placeholder='Name'
+                value={name}
+                onChange={event => setName(event.target.value)}
+                id='signup-name'
+                required
+              />
             </div>
 
             <button type='submit' className='btn btn-primary btn-block' id='login-submit'>SIGNUP</button>
-            <button type='button' className='btn btn-secondary btn-block' id='login-submit' onClick={() => setShowLoginForm(!showLoginForm)}>LOGIN INSTEAD</button>
-
+            <button
+              type='button'
+              className='btn btn-secondary btn-block'
+              id='login-submit'
+              onClick={() => setShowLoginForm(!showLoginForm)}
+            >
+              LOGIN INSTEAD
+            </button>
           </form>
         </div>
       </div>

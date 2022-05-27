@@ -2,9 +2,7 @@ import axios from 'axios'
 const config = require('../config')
 
 const watchlistUrl = `${config.BACKEND_URL}/api/watchlists`
-
 const instrumentUrl = `${config.BACKEND_URL}/api/instruments`
-
 const watchlistInstrumentUrl = `${config.BACKEND_URL}/api/watchlistInstruments`
 
 let token = null
@@ -14,7 +12,10 @@ const setToken = () => {
   token = user.token
 }
 
+// Gets watchlist data by watchlistId
 const getWatchlistData = async (watchlistId) => {
+  // All services which require token authentication will first call setToken() so that we can add the token
+  // in the Authorization header packet
   setToken()
 
   const config = {
@@ -39,6 +40,7 @@ const getWatchlistData = async (watchlistId) => {
   return watchlist
 }
 
+// Gets all watchlists which belong to a user
 const getUserWatchlistData = async (user) => {
   setToken()
 
@@ -52,7 +54,7 @@ const getUserWatchlistData = async (user) => {
   const response = await axios.get(`${watchlistUrl}?user=${user.id}`, config)
   const watchlists = response.data
 
-  // For each watchlist, get the corresponding instruments in it and attach it as a list with property name "instruments"
+  // For each watchlist, fetch its watchlisInstruments and attach them to that watchlist with the property name "instruments"
   await watchlists.forEach(async (w, idx) => {
     const cur_response = await axios.get(`${watchlistInstrumentUrl}?watchlistId=${w.id}`, config)
     watchlists[idx].instruments = cur_response.data
@@ -61,6 +63,7 @@ const getUserWatchlistData = async (user) => {
   return watchlists
 }
 
+// No token required for this route
 const getInstrumentData = async () => {
   const response = await axios.get(instrumentUrl)
   return response.data

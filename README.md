@@ -1,13 +1,13 @@
 ## Fintrack - Create shareable investment watchlists!
 
-Check out the deployed web-app here: https://fintrack-420.netlify.app/
-
 The participation of the retail investor in the securities market keeps on growing year on year and that means these new
 investors would need some mechanism to be up to date on their securities of choice like stocks and mutual funds.
 
 Watchlists are the go-to option for providing such a facility.
 However, any typical investment or investment tracker platform only lets you create watchlists for your own account and not let them be shareable.
 So there is a need for a platform where users can share their investments easily with their friends or relatives and Fintrack lets you do exactly that!
+
+Check out the deployed web-app here: https://fintrack-420.netlify.app/
 
 ## Tech Stuff
 
@@ -20,4 +20,4 @@ So there is a need for a platform where users can share their investments easily
 ##
 Check out the report PDF for a ridiculously long breakdown of what's going on with the code of the app and its functionalities.
 
-This task was done as the Major-Project for the CS816 - Software Production Engineering course @ IIIT-B M.Tech CSE.
+This web-app was made as the Major-Project for the CS816 - Software Production Engineering course @ IIIT-B M.Tech CSE.

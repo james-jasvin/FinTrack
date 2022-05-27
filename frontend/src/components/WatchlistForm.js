@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+/*
+  This component is used for creating a new Watchlist
+*/
 const WatchlistForm = ({ createWatchlist }) => {
   const [ name, setName ] = useState('')
   const [ isMF, setIsMF ] = useState(false)
@@ -25,7 +28,15 @@ const WatchlistForm = ({ createWatchlist }) => {
       <form onSubmit={addWatchlist} id='watchlist-form' data-testid='watchlist-form'>
         <div className='form-group'>
           <label htmlFor='watchlist-name'>Watchlist Name:</label>
-          <input className='form-control' value={name} onChange={event => setName(event.target.value)} placeholder='Enter watchlist name' type='text' id='watchlist-name' required/>
+          <input
+            className='form-control'
+            value={name}
+            onChange={event => setName(event.target.value)}
+            placeholder='Enter watchlist name'
+            type='text'
+            id='watchlist-name'
+            required
+          />
         </div>
 
         <div className='form-radio-group' onChange={event => setIsMF(event.target.value === 'mf')}>

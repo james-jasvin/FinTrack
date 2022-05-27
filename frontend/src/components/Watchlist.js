@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import WatchlistInstrument from './WatchlistInstrument'
 const config = require('../config')
 
+/*
+  This component is for rendering a single Watchlist and its WatchlistInstruments which are separate components
+  Rendering can be for "Your Watchlists" view, i.e. "/" route or for Single Watchlist view, i.e. "/watchlists/:id" route
+*/
 const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) => {
+  // This state is used to determine whether to show the watchlistInstruments or not
+  // visibiliy = false => WatchlistInstruments are not shown and shown when true
   const [ visibility, setVisibility ] = useState(false)
   const toggleVisibility = () => setVisibility(!visibility)
 
@@ -17,7 +23,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
     }, 2000)
   }
 
-  // If no watchlist has been loaded yet, then return null immediately to avoid errors
+  // If no watchlist has been loaded yet, then show loading screen instead to avoid errors
   if (!watchlist)
     return (
       <>
@@ -83,7 +89,11 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
         
         <div>
           <nav className="navbar navbar-dark navbar-expand-sm">
-            <button className="navbar-brand btn btn-link border border-dark p-2"><h4>{watchlist.name}<br/><small>{watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}</small></h4></button>
+            <button className="navbar-brand btn btn-link border border-dark p-2">
+              <h4>{watchlist.name}<br/>
+                <small>{watchlist.isMF? 'Mutual Funds Watchlist': 'Stocks Watchlist'}</small>
+              </h4>
+            </button>
 
             <div>
               <ul className="navbar-nav mr-auto">
@@ -92,7 +102,7 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                   removeWatchlist?
                   <li className="nav-item active">
                     <button onClick={toggleVisibility} className='visibility-button btn btn-link' data-testid='visibility-button'>
-                      {visibility? <i className="fa-solid fa-angle-up"></i>: <i className="fa-solid fa-angle-down"></i>}
+                      { visibility? <i className="fa-solid fa-angle-up"></i>: <i className="fa-solid fa-angle-down"></i> }
                     </button>
                   </li>
                   : ''
@@ -107,8 +117,12 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
                 </li>
 
                 {
-                  // Only show the option to delete watchlist, if owner of watchlist is viewing the watchlist and not some other user
-                  // This is checked by checking removeWatchlist parameter, it is non-null if owner is viewing and null otherwise
+                  /*
+                    Only show the option to delete a watchlist if it's creator is accessing the watchlist
+                    and not some other user.
+                    This is checked with the removeWatchlist parameter.
+                    It is non-null if creator is viewing and null otherwise.
+                  */
                   removeWatchlist?
                   <li className='nav-item'>
                     <button onClick={deleteWatchlist} className='delete-watchlist remove-button btn btn-link'>
@@ -122,14 +136,17 @@ const Watchlist = ({ watchlist, removeWatchlist, removeWatchlistInstrument }) =>
           </nav>
         </div>
 
-        {/* Replace the inline style by something more pleasant later on */}
         <div className='ml-4 mb-4 h5 copiedLinkSuccess'>{ copiedLinkSuccess }</div>
 
       </div>
       {
-        // If in single watchlist view mode => removeWatchlist === null, then visibility doesn't matter and we should show WatchlistInstruments
-        // If in normal watchlist view mode => removeWatchlist !== null, then visibility should be true for showing WatchlistInstruments
-        // The summary of these two conditions is, (removeWatchlist === null || visibility)
+        /*
+          If in single watchlist view mode => removeWatchlist === null,
+            then visibility doesn't matter and we should show WatchlistInstruments
+          If in normal watchlist view mode => removeWatchlist !== null,
+            then visibility should be true for showing WatchlistInstruments
+          The summary of these two conditions is, (removeWatchlist === null || visibility)
+        */
         (removeWatchlist === null || visibility) &&
         <div className='watchlist-details' data-testid='watchlist-details'>
           <div className='watchlist-content rounded p-2 regular-shadow'>
